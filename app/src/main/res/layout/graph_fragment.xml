@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="graphModel"
+            type="stas.batura.pressuretracker.ui.graph.GraphViewModel" />
+
+        <variable
+            name="mainViewModel"
+            type= "stas.batura.pressuretracker.MainViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/graph_to_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:text="list" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_n0"
+
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_n1"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_n2"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_n3"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_n4"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_n5"
+                    />
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                >
+
+                <RadioButton
+                    android:id="@+id/rain_0"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rain_1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rain_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rain_3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rain_4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rain_5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                     />
+
+            </RadioGroup>
+
+        <com.jjoe64.graphview.GraphView
+            android:layout_marginTop="24dp"
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            />
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/testbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> mainViewModel.testSave()}"
+            android:layout_margin="12dp"
+            android:text="test save"
+            />
+
+<!--        <Button-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="12dp"-->
+<!--            android:text="crash"-->
+<!--            android:onClick="@{() -> mainViewModel.crash() }"-->
+<!--            />-->
+
+<!--        <com.anychart.AnyChartView-->
+<!--            android:id="@+id/any_chart"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="300dp"-->
+<!--            />-->
+
+    </LinearLayout>
+</layout>

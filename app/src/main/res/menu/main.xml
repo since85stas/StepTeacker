@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <item-->
+<!--        android:id="@+id/action_list"-->
+<!--        android:orderInCategory="100"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="list"-->
+<!--        />-->
+
+<!--    <item-->
+<!--        android:id="@+id/action_graph"-->
+<!--        android:orderInCategory="100"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="graph"-->
+<!--        -->
+<!--        />-->
+
+    <item
+        android:id="@+id/action_file"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="to file"
+
+        />
+
+<!--    <item-->
+<!--        android:id="@+id/action_title"-->
+<!--        android:title="Playlist"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        -->
+<!--        />-->
+
+</menu>
