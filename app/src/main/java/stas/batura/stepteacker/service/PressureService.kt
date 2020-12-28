@@ -29,6 +29,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import stas.batura.stepteacker.MainActivity
+import stas.batura.stepteacker.data.IRep
+import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.rx.chess.ChessClockRx
+import stas.batura.stepteacker.rx.chess.ChessStateChageListner
+import stas.batura.stepteacker.rx.rxZipper.Container
+import stas.batura.stepteacker.utils.*
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
@@ -39,7 +46,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class PressureService @Inject constructor(): LifecycleService(), SensorEventListener, LocationListener,
-        ChessStateChageListner {
+    ChessStateChageListner {
 
     /**
      * Job allows us to cancel all coroutines started by this ViewModel.
@@ -228,18 +235,22 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
         sensorManager.unregisterListener(this)
     }
 
-    override fun onLocationChanged(location: Location?) {
+    override fun onLocationChanged(location: Location) {
         Log.d(TAG, "onLocationChanged: ")
     }
 
-    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-    }
-
-    override fun onProviderEnabled(provider: String?) {
-    }
-
-    override fun onProviderDisabled(provider: String?) {
-    }
+    //    override fun onLocationChanged(location: Location?) {
+//        Log.d(TAG, "onLocationChanged: ")
+//    }
+//
+//    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+//    }
+//
+//    override fun onProviderEnabled(provider: String?) {
+//    }
+//
+//    override fun onProviderDisabled(provider: String?) {
+//    }
 
     /**
      * creates a new clock object
@@ -311,7 +322,7 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
         )
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(getIconId())
+//                .setSmallIcon(getIconId())
                 .setStyle(NotificationCompat.BigTextStyle()
                         .bigText("Collecting pressure..."))
 //                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -324,17 +335,17 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
     /**
      * get notif icon ID
      */
-    private fun getIconId(): Int {
-        when (lastPower) {
-            0 -> return R.drawable.icon_n0
-            1 -> return R.drawable.icon_n1
-            2 -> return R.drawable.icon_n2
-            3 -> return R.drawable.icon_n3
-            4 -> return R.drawable.icon_n4
-            5 -> return R.drawable.icon_n5
-        }
-        return R.drawable.icon_n0
-    }
+//    private fun getIconId(): Int {
+//        when (lastPower) {
+//            0 -> return R.drawable.icon_n0
+//            1 -> return R.drawable.icon_n1
+//            2 -> return R.drawable.icon_n2
+//            3 -> return R.drawable.icon_n3
+//            4 -> return R.drawable.icon_n4
+//            5 -> return R.drawable.icon_n5
+//        }
+//        return R.drawable.icon_n0
+//    }
 
     /**
      * updating notific icons

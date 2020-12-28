@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="stas.batura.pressuretracker.ui.main.MainFragmentViewModel" />
+            type="stas.batura.stepteacker.ui.main.MainFragmentViewModel" />
     </data>
 
     <LinearLayout

@@ -103,8 +103,5 @@ dependencies {
 
 //    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
-    // file picker
-    implementation 'com.github.TutorialsAndroid:FilePicker:v8.0.19'
-
     implementation 'com.google.android.gms:play-services-location:15.0.1'
 }

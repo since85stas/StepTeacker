@@ -11,15 +11,16 @@ import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.developer.filepicker.view.FilePickerDialog;
-
 import dagger.hilt.android.AndroidEntryPoint;
-import stas.batura.pressuretracker.ui.main.MainFragment;
 import stas.batura.stepteacker.service.PressureService;
-import stas.batura.pressuretracker.utils.ContexUtils;
+import stas.batura.stepteacker.utils.ContexUtils;
+
+
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
+
+    public final int EXTERNAL_READ_PERMISSION_GRANT = 112;
 
     MainViewModel mainViewModel;
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 //                array[1] = Manifest.permission.LoC
                 this.requestPermissions(
                         array,
-                        FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT
+                        EXTERNAL_READ_PERMISSION_GRANT
                 );
             }
         }

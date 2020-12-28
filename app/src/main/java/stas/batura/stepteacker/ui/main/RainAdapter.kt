@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import stas.batura.stepteacker.data.room.Rain
-import stas.batura.pressuretracker.databinding.RainItemBinding
+import stas.batura.stepteacker.databinding.RainItemBinding
 
 class RainAdapter ():
         ListAdapter<Rain, RainAdapter.ViewHolder>(TrackDiffCalback()) {

@@ -24,9 +24,9 @@ import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import stas.batura.stepteacker.MainViewModel;
-import stas.batura.pressuretracker.R;
+import stas.batura.stepteacker.R;
 import stas.batura.stepteacker.data.room.Pressure;
-import stas.batura.pressuretracker.databinding.PressureFragmentBinding;
+import stas.batura.stepteacker.databinding.PressureFragmentBinding;
 
 @AndroidEntryPoint
 public class MainFragment extends Fragment {

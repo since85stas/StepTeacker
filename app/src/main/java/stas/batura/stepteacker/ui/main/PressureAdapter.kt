@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import stas.batura.stepteacker.data.room.Pressure
-import stas.batura.pressuretracker.databinding.PressureItemBinding
+import stas.batura.stepteacker.databinding.PressureItemBinding
 
 class PressureAdapter ():
     ListAdapter<Pressure, PressureAdapter.ViewHolder> (TrackDiffCalback()) {
@@ -19,7 +19,7 @@ class PressureAdapter ():
         holder.bind(getItem(position))
     }
 
-    class ViewHolder (val binding: PressureItemBinding ) : RecyclerView.ViewHolder (binding.root) {
+    class ViewHolder (val binding: PressureItemBinding) : RecyclerView.ViewHolder (binding.root) {
 
         fun bind (pressure: Pressure) {
             binding.pressure = pressure

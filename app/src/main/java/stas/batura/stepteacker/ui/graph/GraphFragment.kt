@@ -19,9 +19,9 @@ import com.jjoe64.graphview.series.PointsGraphSeries
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.graph_fragment.*
 import stas.batura.stepteacker.MainViewModel
-import stas.batura.pressuretracker.R
+import stas.batura.stepteacker.R
 import stas.batura.stepteacker.data.room.Pressure
-import stas.batura.pressuretracker.databinding.GraphFragmentBinding
+import stas.batura.stepteacker.databinding.GraphFragmentBinding
 import stas.batura.stepteacker.utils.getCurrentDayBegin
 
 

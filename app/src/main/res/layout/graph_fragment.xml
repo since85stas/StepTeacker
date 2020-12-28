@@ -5,11 +5,11 @@
 
         <variable
             name="graphModel"
-            type="stas.batura.pressuretracker.ui.graph.GraphViewModel" />
+            type="stas.batura.stepteacker.ui.graph.GraphViewModel" />
 
         <variable
             name="mainViewModel"
-            type= "stas.batura.pressuretracker.MainViewModel"/>
+            type= "stas.batura.stepteacker.MainViewModel"/>
     </data>
 
     <LinearLayout
