@@ -151,13 +151,13 @@ class GraphFragment: Fragment() {
             }
         })
 
-        graph_to_list.setOnClickListener { v ->
-            run {
-
-                v.findNavController().navigate(R.id.action_graphFragment_to_listFragment)
-
-            }
-        }
+//        graph_to_list.setOnClickListener { v ->
+//            run {
+//
+//                v.findNavController().navigate(R.id.action_graphFragment_to_listFragment)
+//
+//            }
+//        }
     }
 
 

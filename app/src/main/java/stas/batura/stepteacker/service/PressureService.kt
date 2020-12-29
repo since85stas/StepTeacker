@@ -322,7 +322,7 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
         )
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-//                .setSmallIcon(getIconId())
+                .setSmallIcon(getIconId())
                 .setStyle(NotificationCompat.BigTextStyle()
                         .bigText("Collecting pressure..."))
 //                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -335,17 +335,12 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
     /**
      * get notif icon ID
      */
-//    private fun getIconId(): Int {
+    private fun getIconId(): Int {
 //        when (lastPower) {
-//            0 -> return R.drawable.icon_n0
-//            1 -> return R.drawable.icon_n1
-//            2 -> return R.drawable.icon_n2
-//            3 -> return R.drawable.icon_n3
-//            4 -> return R.drawable.icon_n4
-//            5 -> return R.drawable.icon_n5
+//            0 -> return stas.batura.stepteacker.R.drawable.icon_0
 //        }
-//        return R.drawable.icon_n0
-//    }
+        return stas.batura.stepteacker.R.drawable.icon_0
+    }
 
     /**
      * updating notific icons

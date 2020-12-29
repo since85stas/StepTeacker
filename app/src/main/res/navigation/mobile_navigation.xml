@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/graphFragment"
-        android:name="stas.batura.pressuretracker.ui.graph.GraphFragment"
+        android:name="stas.batura.stepteacker.ui.graph.GraphFragment"
         android:label="control_fragment"
         tools:layout="@layout/graph_fragment" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="stas.batura.pressuretracker.ui.main.MainFragment"
+        android:name="stas.batura.stepteacker.ui.main.MainFragment"
         android:label="PlaylistFragment"
         tools:layout="@layout/pressure_fragment"
 

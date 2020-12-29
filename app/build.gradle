@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
 
@@ -56,6 +55,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
 
+    implementation 'com.google.android.material:material:1.2.1'
+
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$version_room"
     implementation "androidx.room:room-ktx:$version_room"
@@ -104,4 +105,7 @@ dependencies {
 //    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
     implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-fitness:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
 }
