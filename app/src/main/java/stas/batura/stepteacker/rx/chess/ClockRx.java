@@ -6,10 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class ChessClockRx {
+public class ClockRx {
 
     public static final String TAG = "ChessClockRx";
 
@@ -19,9 +18,9 @@ public class ChessClockRx {
 
     Subscription mSubscription;
 
-    ChessStateChageListner listner;
+    ClockStateChageListner listner;
 
-    public ChessClockRx( long interval, ChessStateChageListner listner  ) {
+    public ClockRx(long interval, ClockStateChageListner listner  ) {
         this.interval = interval;
         this.listner = listner;
         rxChessTimer();
@@ -34,7 +33,7 @@ public class ChessClockRx {
                     subscribeOn(Schedulers.io()).
 //                    observeOn(AndroidSchedulers.mainThread()).
                     onBackpressureBuffer().
-                    subscribe(new ChessClockSubscriberBold(listner, interval, this));
+                    subscribe(new ClockSubscriberBold(listner, interval, this));
         } else {
             isRunning = false;
             mSubscription.unsubscribe();

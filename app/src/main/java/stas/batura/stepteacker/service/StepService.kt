@@ -16,7 +16,6 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Binder
 import android.os.Build
-import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
@@ -32,8 +31,8 @@ import kotlinx.coroutines.launch
 import stas.batura.stepteacker.MainActivity
 import stas.batura.stepteacker.data.IRep
 import stas.batura.stepteacker.data.room.Pressure
-import stas.batura.stepteacker.rx.chess.ChessClockRx
-import stas.batura.stepteacker.rx.chess.ChessStateChageListner
+import stas.batura.stepteacker.rx.chess.ClockRx
+import stas.batura.stepteacker.rx.chess.ClockStateChageListner
 import stas.batura.stepteacker.rx.rxZipper.Container
 import stas.batura.stepteacker.utils.*
 import java.io.File
@@ -45,8 +44,8 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class PressureService @Inject constructor(): LifecycleService(), SensorEventListener, LocationListener,
-    ChessStateChageListner {
+class StepService @Inject constructor(): LifecycleService(), SensorEventListener, LocationListener,
+    ClockStateChageListner {
 
     /**
      * Job allows us to cancel all coroutines started by this ViewModel.
@@ -58,7 +57,7 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
      */
     private val ioScope = CoroutineScope(Dispatchers.IO + serviceJob)
 
-    private val TAG = PressureService::class.simpleName
+    private val TAG = StepService::class.simpleName
 
     private val NOTIFICATION_ID = 21
 
@@ -91,7 +90,7 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
 //    @Inject lateinit var fusedLocationClient: FusedLocationProviderClient
 
     // chess instance to calculate distance before saves
-    private lateinit var chessClockRx: ChessClockRx
+    private lateinit var clockRx: ClockRx
 
     // last rain power
     private var lastPower: Int = 0
@@ -259,15 +258,15 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
 //        if (chessClockRx != null ) {
 //            chessClockRx.stopTimer()
 //        }
-        chessClockRx = ChessClockRx(INTERVAL, this)
-        Log.d(TAG, "createClock: " + chessClockRx.toString())
+        clockRx = ClockRx(INTERVAL, this)
+        Log.d(TAG, "createClock: " + clockRx.toString())
     }
 
     /**
      * stoping clock fun
      */
     private fun stopClock() {
-        chessClockRx.stopTimer()
+        clockRx.stopTimer()
     }
 
     /**
@@ -380,25 +379,25 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
         var isBind: Boolean = false
 
         fun setRainPower(rainpower: Int) {
-            this@PressureService.lastPower = rainpower
+            this@StepService.lastPower = rainpower
             updateNotification()
         }
 
         fun closeService() {
-            this@PressureService.stopService()
+            this@StepService.stopService()
         }
 
         fun getRainPower() : Int {
-            return this@PressureService.lastPower
+            return this@StepService.lastPower
         }
 
         fun savePressure() {
-            this@PressureService.combineData()
+            this@StepService.combineData()
             return
         }
 
         fun testWrite() {
-            this@PressureService.testWriteFile()
+            this@StepService.testWriteFile()
         }
 
 //        fun testLocation() {
@@ -406,7 +405,7 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
 //        }
 
         fun updateNotif() {
-            this@PressureService.updateNotification()
+            this@StepService.updateNotification()
         }
 
         fun testRx() {
@@ -414,7 +413,7 @@ class PressureService @Inject constructor(): LifecycleService(), SensorEventList
         }
 
         fun getLastDayBeg(): Calendar {
-            return this@PressureService.lastDayBegin
+            return this@StepService.lastDayBegin
         }
     }
 

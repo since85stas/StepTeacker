@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import stas.batura.stepteacker.data.IRep
 import stas.batura.stepteacker.data.room.Pressure
-import stas.batura.stepteacker.service.PressureService
+import stas.batura.stepteacker.service.StepService
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import java.util.*
 
@@ -23,7 +23,7 @@ class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewMod
 
     var lastDayPressures: MutableLiveData<List<Pressure>?> = MutableLiveData(null)
 
-    private var playerServiceBinder: PressureService.PressureServiceBinder? = null
+    private var playerServiceBinder: StepService.PressureServiceBinder? = null
 
     private var _stopServiceLive: MutableLiveData<Boolean> = MutableLiveData(false)
     val stopServiceLive: LiveData<Boolean>
@@ -44,7 +44,7 @@ class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewMod
             serviceConnection.value = object : ServiceConnection {
                 override fun onServiceConnected(name: ComponentName, service: IBinder) {
                     try {
-                        playerServiceBinder = service as PressureService.PressureServiceBinder
+                        playerServiceBinder = service as StepService.PressureServiceBinder
 
                         updateNotif()
                     } catch (e: RemoteException) {

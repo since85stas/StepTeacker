@@ -1,15 +1,12 @@
 package stas.batura.stepteacker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -20,7 +17,6 @@ import com.google.android.gms.fitness.FitnessOptions;
 import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.result.DataReadResponse;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.time.LocalDateTime;
@@ -28,8 +24,7 @@ import java.time.ZoneId;
 import java.util.concurrent.TimeUnit;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import stas.batura.stepteacker.service.PressureService;
-import stas.batura.stepteacker.utils.ContexUtils;
+import stas.batura.stepteacker.service.StepService;
 
 
 @AndroidEntryPoint
@@ -176,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void bindCurrentService(ServiceConnection serviceConnection) {
         // привязываем сервис к активити
-        bindService(new Intent(getApplicationContext(), PressureService.class),
+        bindService(new Intent(getApplicationContext(), StepService.class),
                 serviceConnection,
                 Context.BIND_AUTO_CREATE);
     }

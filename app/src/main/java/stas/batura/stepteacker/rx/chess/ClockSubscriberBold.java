@@ -4,22 +4,22 @@ import android.util.Log;
 
 import rx.Subscriber;
 
-public class ChessClockSubscriberBold extends Subscriber<Long> {
+public class ClockSubscriberBold extends Subscriber<Long> {
 
-    public ChessStateChageListner mListner;
+    public ClockStateChageListner mListner;
 
 //    long[] timeIntervalsSub;
 
     long interval;
 
-    ChessClockRx observable;
+    ClockRx observable;
 
     long saved;
 
-    public static final String TAG = ChessClockSubscriberBold.class.getName();
+    public static final String TAG = ClockSubscriberBold.class.getName();
 
 
-    public ChessClockSubscriberBold(ChessStateChageListner listner, long interval, ChessClockRx observable) {
+    public ClockSubscriberBold(ClockStateChageListner listner, long interval, ClockRx observable) {
         super();
         mListner = listner;
         this.interval = interval;
