@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="stas.batura.stepteacker.ui.main.MainFragmentViewModel" />
+            type="stas.batura.stepteacker.ui.today.MainFragmentViewModel" />
     </data>
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".ui.main.MainFragment">
+        tools:context=".ui.today.TodayFragment">
 
         <TextView
             android:layout_width="wrap_content"

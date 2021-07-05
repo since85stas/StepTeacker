@@ -1,4 +1,4 @@
-package stas.batura.stepteacker.ui.main
+package stas.batura.stepteacker.ui.today
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

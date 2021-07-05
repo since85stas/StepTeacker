@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/listFragment"
+    app:startDestination="@id/todayFragment"
     >
 
     <fragment
@@ -13,15 +13,15 @@
         tools:layout="@layout/graph_fragment" >
         <action
             android:id="@+id/action_graphFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/todayFragment" />
     </fragment>
 
 
     <fragment
-        android:id="@+id/listFragment"
-        android:name="stas.batura.stepteacker.ui.main.MainFragment"
+        android:id="@+id/todayFragment"
+        android:name="stas.batura.stepteacker.ui.today.TodayFragment"
         android:label="PlaylistFragment"
-        tools:layout="@layout/pressure_fragment"
+        tools:layout="@layout/today_fragment"
 
         >
         <action

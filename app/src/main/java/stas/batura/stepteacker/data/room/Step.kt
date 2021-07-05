@@ -6,9 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "days_table")
 data class Day (
 
-        @PrimaryKey(autoGenerate = true)
-        var dayId: Long = 0L,
-
+        @PrimaryKey()
         var date: String = "",
 
         var steps: Int = 0

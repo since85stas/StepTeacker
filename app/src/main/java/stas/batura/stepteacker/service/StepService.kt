@@ -24,26 +24,24 @@ import androidx.lifecycle.LifecycleService
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.functions.Consumer
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import stas.batura.stepteacker.MainActivity
 import stas.batura.stepteacker.data.Repository
 import stas.batura.stepteacker.rx.chess.ClockRx
 import stas.batura.stepteacker.rx.chess.ClockStateChageListner
 import stas.batura.stepteacker.rx.rxZipper.Container
 import stas.batura.stepteacker.utils.*
-import java.io.File
-import java.io.FileWriter
-import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class StepService @Inject constructor(): LifecycleService(), SensorEventListener {
+class StepService @Inject constructor(
+    val repository: Repository
+): LifecycleService(), SensorEventListener {
 
     /**
      * Job allows us to cancel all coroutines started by this ViewModel.
@@ -53,7 +51,7 @@ class StepService @Inject constructor(): LifecycleService(), SensorEventListener
     /**
      * A [CoroutineScope] keeps track of all coroutines started by this Service.
      */
-    private val ioScope = CoroutineScope(Dispatchers.IO + serviceJob)
+    private val serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
 
     private val TAG = StepService::class.simpleName
 
@@ -68,7 +66,7 @@ class StepService @Inject constructor(): LifecycleService(), SensorEventListener
 
     @Inject lateinit var sensorManager: SensorManager
 
-    @Inject lateinit var repository: Repository
+//    @Inject lateinit var repository: Repository
 
     // pressure sensor installed
     private var sensor: Sensor? = null
@@ -76,10 +74,18 @@ class StepService @Inject constructor(): LifecycleService(), SensorEventListener
     // Declaring a Location Manager
     @Inject lateinit var locationManager: LocationManager
 
-    private val consumer = object : Consumer<Container> {
-        override fun accept(t: Container?) {
-            Log.d(TAG, "accept: consum")
-            println(t)
+    init {
+        serviceScope.launch {
+            fakeSteps.collect {
+                repository.updateDaySteps(steps = it, "1")
+            }
+        }
+    }
+
+    private val fakeSteps: Flow<Int> = flow {
+        for (i in 1..1000) {
+            delay(1000) // pretend we are doing something useful here
+            emit(i) // emit next value
         }
     }
 
