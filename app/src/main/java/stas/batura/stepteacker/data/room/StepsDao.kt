@@ -6,6 +6,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
+
+
 @Dao
 interface StepsDao {
 
@@ -20,4 +22,18 @@ interface StepsDao {
 
     @Query("SELECT * FROM days_table WHERE date =:day")
     fun getDay(day: String): Day?
+
+}
+
+@Dao
+interface ParamsDao {
+
+    @Insert
+    fun insertParams(params: CommonParams)
+
+    @Query("UPDATE params_table SET currentDay=:date WHERE id=0")
+    fun updateCurrentDay(date: String)
+
+    @Query("SELECT * FROM params_table WHERE id=0")
+    suspend fun getPsrams()
 }

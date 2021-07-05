@@ -7,3 +7,7 @@ import java.util.*
 
 
 
+@BindingAdapter("setStepCount")
+fun TextView.setStepCount(steps: Int) {
+    text = steps.toString()
+}
