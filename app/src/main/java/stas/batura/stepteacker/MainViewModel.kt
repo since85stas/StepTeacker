@@ -10,7 +10,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import stas.batura.stepteacker.data.Repository
-import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.service.StepService
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import java.util.*
@@ -20,8 +19,6 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
     private val TAG = MainViewModel::class.simpleName
 
     var serviceConnection: MutableLiveData<ServiceConnection?> = MutableLiveData()
-
-    var lastDayPressures: MutableLiveData<List<Step>?> = MutableLiveData(null)
 
     private var playerServiceBinder: StepService.PressureServiceBinder? = null
 
@@ -39,7 +36,6 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
     fun createService() {
 
         if (serviceConnection.value == null) {
-
             // соединение с сервисом
             serviceConnection.value = object : ServiceConnection {
                 override fun onServiceConnected(name: ComponentName, service: IBinder) {
@@ -84,39 +80,11 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
         }
     }
 
-    /**
-     * saving value in DB
-     */
-    fun savePressureValue() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.savePressure()
-        }
-    }
-
-    fun combibeData() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.savePressure()
-        }
-    }
-
-    fun getLastDayData(): Calendar? {
-        if (playerServiceBinder != null) {
-            return playerServiceBinder!!.getLastDayBeg()
-        }
-        return null
-    }
-
     fun testSave() {
         if (playerServiceBinder != null) {
             playerServiceBinder!!.testWrite()
         }
     }
-
-//    fun testLoc() {
-//        if (playerServiceBinder != null) {
-//            playerServiceBinder!!.testLocation()
-//        }
-//    }
 
     fun testRx() {
         if (playerServiceBinder != null) {
@@ -130,16 +98,4 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
         }
     }
 
-    fun getDayPressuresValue() {
-        val day = getLastDayData()
-        if (day != null) {
-            val pressures = repository.getPressuresInInterval(day.timeInMillis,
-                    getCurrentDayEnd(day).timeInMillis)
-            lastDayPressures.value = pressures
-        }
-    }
-
-    fun crash() {
-        throw RuntimeException("Test Crash");
-    }
 }

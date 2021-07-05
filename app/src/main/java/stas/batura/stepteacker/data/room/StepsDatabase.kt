@@ -84,9 +84,9 @@ abstract class StepsDatabase : RoomDatabase() {
                 val rdc: Callback = object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         Log.d("room","dab created")
-                        val rain = Rain(0)
-                        Executors.newSingleThreadScheduledExecutor()
-                                .execute(Runnable { INSTANCE!!.stepsDatabaseDao.insertRain(rain)})
+//                        val rain = Rain(0)
+//                        Executors.newSingleThreadScheduledExecutor()
+//                                .execute(Runnable { INSTANCE!!.stepsDatabaseDao.insertRain(rain)})
                     }
 
                     override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
