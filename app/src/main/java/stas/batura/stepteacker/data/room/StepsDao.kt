@@ -6,7 +6,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-
+@Dao
+interface RoomI: StepsDao, ParamsDao
 
 @Dao
 interface StepsDao {
@@ -35,5 +36,5 @@ interface ParamsDao {
     fun updateCurrentDay(date: String)
 
     @Query("SELECT * FROM params_table WHERE id=0")
-    suspend fun getPsrams()
+    suspend fun getPsrams(): CommonParams
 }

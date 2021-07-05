@@ -8,12 +8,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import stas.batura.stepteacker.data.room.Day
+import stas.batura.stepteacker.data.room.RoomI
 import stas.batura.stepteacker.data.room.StepsDao
 import javax.inject.Inject
 
 
 class RepositoryImpl @Inject constructor(
-    val stepDao: StepsDao
+    val stepDao: RoomI
 ): Repository {
 
 
