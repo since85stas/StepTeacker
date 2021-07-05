@@ -29,8 +29,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import stas.batura.stepteacker.MainActivity
-import stas.batura.stepteacker.data.IRep
-import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.data.Repository
+import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.rx.chess.ClockRx
 import stas.batura.stepteacker.rx.chess.ClockStateChageListner
 import stas.batura.stepteacker.rx.rxZipper.Container
@@ -70,7 +70,7 @@ class StepService @Inject constructor(): LifecycleService(), SensorEventListener
 
     @Inject lateinit var sensorManager: SensorManager
 
-    @Inject lateinit var repository: IRep
+    @Inject lateinit var repository: Repository
 
     // pressure sensor installed
     private var sensor: Sensor? = null
@@ -190,7 +190,7 @@ class StepService @Inject constructor(): LifecycleService(), SensorEventListener
      */
     private fun savePressureValue(pressure: Float, altitude: Float) {
         val mmPres = pressure
-        val roomPre = Pressure(mmPres, System.currentTimeMillis(), lastPower, altitude)
+        val roomPre = Step(mmPres, System.currentTimeMillis(), lastPower, altitude)
         Log.d(TAG, "savePressureValue: " + pressure +" " + altitude)
         repository.insertPressure(roomPre)
     }
@@ -469,7 +469,7 @@ class StepService @Inject constructor(): LifecycleService(), SensorEventListener
     /**
      * writing data to file
      */
-    private suspend fun writeDataToFile(fileWriter: FileWriter?, data: List<Pressure>) {
+    private suspend fun writeDataToFile(fileWriter: FileWriter?, data: List<Step>) {
         if (data != null) {
 
             Log.d(TAG, "writeDataToFile: begin size=" + data.size)

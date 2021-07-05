@@ -9,19 +9,19 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import stas.batura.stepteacker.data.IRep
-import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.data.Repository
+import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.service.StepService
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import java.util.*
 
-class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
 
     private val TAG = MainViewModel::class.simpleName
 
     var serviceConnection: MutableLiveData<ServiceConnection?> = MutableLiveData()
 
-    var lastDayPressures: MutableLiveData<List<Pressure>?> = MutableLiveData(null)
+    var lastDayPressures: MutableLiveData<List<Step>?> = MutableLiveData(null)
 
     private var playerServiceBinder: StepService.PressureServiceBinder? = null
 
@@ -30,7 +30,7 @@ class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewMod
         get() = _stopServiceLive
 
     init {
-        createService()
+//        createService()
     }
 
     /**

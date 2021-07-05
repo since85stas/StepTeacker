@@ -32,13 +32,13 @@ import java.util.concurrent.Executors
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities =[Pressure::class, Rain::class], version = 7, exportSchema = false)
-abstract class PressureDatabase : RoomDatabase() {
+@Database(entities =[Day::class], version = 1, exportSchema = false)
+abstract class StepsDatabase : RoomDatabase() {
 
     /**
      * Connects the database to the DAO.
      */
-    abstract val pressureDatabaseDao: PressureDao
+    abstract val stepsDatabaseDao: StepsDao
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.
@@ -57,7 +57,7 @@ abstract class PressureDatabase : RoomDatabase() {
          *  thread to shared data are visible to other threads.
          */
         @Volatile
-        private var INSTANCE: PressureDatabase? = null
+        private var INSTANCE: StepsDatabase? = null
 
         /**
          * Helper function to get the database.
@@ -76,7 +76,7 @@ abstract class PressureDatabase : RoomDatabase() {
          *
          * @param context The application context Singleton, used to get access to the filesystem.
          */
-        fun getInstance(context: Context): PressureDatabase {
+        fun getInstance(context: Context): StepsDatabase {
             // Multiple threads can ask for the database at the same time, ensure we only initialize
             // it once by using synchronized. Only one thread may enter a synchronized block at a
             // time.
@@ -86,7 +86,7 @@ abstract class PressureDatabase : RoomDatabase() {
                         Log.d("room","dab created")
                         val rain = Rain(0)
                         Executors.newSingleThreadScheduledExecutor()
-                                .execute(Runnable { INSTANCE!!.pressureDatabaseDao.insertRain(rain)})
+                                .execute(Runnable { INSTANCE!!.stepsDatabaseDao.insertRain(rain)})
                     }
 
                     override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
@@ -106,7 +106,7 @@ abstract class PressureDatabase : RoomDatabase() {
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                             context.applicationContext,
-                            PressureDatabase::class.java,
+                            StepsDatabase::class.java,
                             "lessons_history_database"
                     )
                             // Wipes and rebuilds instead of migrating if no Migration object.

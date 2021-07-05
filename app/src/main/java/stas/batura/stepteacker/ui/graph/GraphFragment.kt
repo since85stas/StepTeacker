@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.graph_fragment.*
 import stas.batura.stepteacker.MainViewModel
 import stas.batura.stepteacker.R
-import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.databinding.GraphFragmentBinding
 import stas.batura.stepteacker.utils.getCurrentDayBegin
 
@@ -182,7 +182,7 @@ class GraphFragment: Fragment() {
         })
     }
 
-    private fun shiftTime(list: List<Pressure>): List<Pressure> {
+    private fun shiftTime(list: List<Step>): List<Step> {
         if (list.size > 0) {
             val initVal = list[0].time
             for (pressure in list) {
@@ -194,9 +194,9 @@ class GraphFragment: Fragment() {
     }
 
 
-    private fun getRainList(list: List<Pressure>): List<List<Pressure>> {
-        val rainList = mutableListOf<List<Pressure>>()
-        var powerList = mutableListOf<Pressure>()
+    private fun getRainList(list: List<Step>): List<List<Step>> {
+        val rainList = mutableListOf<List<Step>>()
+        var powerList = mutableListOf<Step>()
 
         var pow = 1
         for (i in pow..5) {
@@ -206,7 +206,7 @@ class GraphFragment: Fragment() {
                 }
             }
             rainList.add(powerList)
-            powerList = mutableListOf<Pressure>()
+            powerList = mutableListOf<Step>()
             pow += 1
         }
         return rainList
@@ -219,12 +219,12 @@ class GraphFragment: Fragment() {
     /**
      * preparing data for plot
      */
-    private fun prepareData(list: List<Pressure>):  List<List<Pressure>>{
+    private fun prepareData(list: List<Step>):  List<List<Step>>{
 
-        val linesList = mutableListOf<List<Pressure>>()
+        val linesList = mutableListOf<List<Step>>()
 
         var count = 0
-        var presuresList = mutableListOf<Pressure>()
+        var presuresList = mutableListOf<Step>()
         if (list.size > 0 ) {
             var lastPower = list[0].rainPower
             for (pressure in list) {
@@ -233,7 +233,7 @@ class GraphFragment: Fragment() {
                     presuresList.add(pressure)
                 } else {
                     linesList.add(presuresList)
-                    presuresList = mutableListOf<Pressure>()
+                    presuresList = mutableListOf<Step>()
                     lastPower = pressure.rainPower
                     presuresList.add(pressure)
                 }
@@ -264,14 +264,14 @@ class GraphFragment: Fragment() {
     /**
      * creating pressue plot using GraphView
      */
-    private fun drawLine(array: List<Pressure>) {
+    private fun drawLine(array: List<Step>) {
         val data = parseData(array)
         val series: LineGraphSeries<DataPoint> = LineGraphSeries(data)
         series.color = getColor(array[0])
         graph.addSeries(series)
     }
 
-    private fun drawOld(alllist: List<Pressure>, rainlist: List<List<Pressure>>) {
+    private fun drawOld(alllist: List<Step>, rainlist: List<List<Step>>) {
         val allpoints = parseDataOld(alllist)
 
         try{
@@ -315,7 +315,7 @@ class GraphFragment: Fragment() {
 
     }
 
-    private fun parseData(list: List<Pressure>):  Array<DataPoint>{
+    private fun parseData(list: List<Step>):  Array<DataPoint>{
         var count = 0
         var listM = mutableListOf<DataPoint>()
         if(list.size > 0) {
@@ -328,7 +328,7 @@ class GraphFragment: Fragment() {
         return listM.toTypedArray()
     }
 
-    private fun parseDataOld(list: List<Pressure>):  Array<DataPoint>{
+    private fun parseDataOld(list: List<Step>):  Array<DataPoint>{
         var listM = mutableListOf<DataPoint>()
         if(list.size > 0) {
 //            val firstTime = list.get(0).time
@@ -346,8 +346,8 @@ class GraphFragment: Fragment() {
         return nullPress;
     }
 
-    private fun getColor(pressure: Pressure): Int {
-        when(pressure.rainPower) {
+    private fun getColor(step: Step): Int {
+        when(step.rainPower) {
             0 -> return Color.YELLOW
             1 -> return Color.GRAY
             2 -> return Color.CYAN

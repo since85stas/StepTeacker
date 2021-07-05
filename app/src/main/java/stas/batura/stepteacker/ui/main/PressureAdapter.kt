@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.databinding.PressureItemBinding
 
 class PressureAdapter ():
-    ListAdapter<Pressure, PressureAdapter.ViewHolder> (TrackDiffCalback()) {
+    ListAdapter<Step, PressureAdapter.ViewHolder> (TrackDiffCalback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -21,8 +21,8 @@ class PressureAdapter ():
 
     class ViewHolder (val binding: PressureItemBinding) : RecyclerView.ViewHolder (binding.root) {
 
-        fun bind (pressure: Pressure) {
-            binding.pressure = pressure
+        fun bind (step: Step) {
+            binding.pressure = step
 //            binding.viewHolder = this
             binding.executePendingBindings()
         }
@@ -43,18 +43,18 @@ class PressureAdapter ():
     }
 
 
-    class TrackDiffCalback : DiffUtil.ItemCallback<Pressure> (){
+    class TrackDiffCalback : DiffUtil.ItemCallback<Step> (){
 
         override fun areItemsTheSame(
-            oldItem: Pressure,
-            newItem: Pressure
+            oldItem: Step,
+            newItem: Step
         ): Boolean {
             return oldItem.equals(newItem)
         }
 
         override fun areContentsTheSame(
-            oldItem: Pressure,
-            newItem: Pressure
+            oldItem: Step,
+            newItem: Step
         ): Boolean {
             return  oldItem == newItem
         }

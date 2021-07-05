@@ -10,8 +10,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import stas.batura.stepteacker.data.room.PressureDao
-import stas.batura.stepteacker.data.room.PressureDatabase
+import stas.batura.stepteacker.data.room.StepsDao
+import stas.batura.stepteacker.data.room.StepsDatabase
 import javax.inject.Singleton
 
 @Module
@@ -19,14 +19,14 @@ import javax.inject.Singleton
 class RoomModule {
 
     @Provides
-    fun providePressureDao(database: PressureDatabase): PressureDao {
-        return database.pressureDatabaseDao
+    fun providePressureDao(database: StepsDatabase): StepsDao {
+        return database.stepsDatabaseDao
     }
 
     @Provides
     @Singleton
-    fun providesDatabase(@ApplicationContext appContext: Context): PressureDatabase {
-        return PressureDatabase.getInstance(appContext)
+    fun providesDatabase(@ApplicationContext appContext: Context): StepsDatabase {
+        return StepsDatabase.getInstance(appContext)
     }
 
 

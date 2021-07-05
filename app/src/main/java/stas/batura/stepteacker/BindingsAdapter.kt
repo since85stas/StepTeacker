@@ -2,31 +2,31 @@ package stas.batura.stepteacker
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.data.room.Step
 import java.text.SimpleDateFormat
 import java.util.*
 
 @BindingAdapter("pressureTextBind")
-fun TextView.pressureTextBind(pressure: Pressure) {
-    text = pressure.pressure.toString()
+fun TextView.pressureTextBind(step: Step) {
+    text = step.pressure.toString()
 }
 
 @BindingAdapter("timeBind")
-fun TextView.timeBind(pressure: Pressure) {
+fun TextView.timeBind(step: Step) {
     val formatter = SimpleDateFormat("dd/MM HH:mm");
-    val dateString = formatter.format( Date(pressure.time));
+    val dateString = formatter.format( Date(step.time));
     text = dateString
 //    text = pressure.time.toString()
 }
 
 @BindingAdapter("rainPowBind")
-fun TextView.rainPowBind(pressure: Pressure) {
-    text = pressure.rainPower.toString()
+fun TextView.rainPowBind(step: Step) {
+    text = step.rainPower.toString()
 }
 
 @BindingAdapter("altBind")
-fun TextView.alt(pressure: Pressure) {
-    text = pressure.altitude.toString()
+fun TextView.alt(step: Step) {
+    text = step.altitude.toString()
 }
 
 //@BindingAdapter("timeRainBind")

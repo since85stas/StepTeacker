@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.3'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
@@ -30,7 +30,7 @@ allprojects {
 ext {
     // App SDK versions.
     compileSdkVersion = 30
-    minSdkVersion = 26
+    minSdkVersion = 29
     targetSdkVersion = 30
 
     // Dependency versions.
