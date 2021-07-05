@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.main_activity);
 
+        mainViewModel.createService();
+
 //        if(ContextCompat.checkSelfPermission(this,
 //                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
 //            //ask for permission

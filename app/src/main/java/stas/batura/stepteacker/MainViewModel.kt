@@ -74,24 +74,6 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
         _stopServiceLive.value = true
     }
 
-    fun setServiceRain(rainp: Int) {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.setRainPower(rainp)
-        }
-    }
-
-    fun testSave() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.testWrite()
-        }
-    }
-
-    fun testRx() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.testRx()
-        }
-    }
-
     fun updateNotif() {
         if (playerServiceBinder != null) {
             playerServiceBinder!!.updateNotif()

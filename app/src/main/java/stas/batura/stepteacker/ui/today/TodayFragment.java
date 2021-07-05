@@ -1,6 +1,7 @@
 package stas.batura.stepteacker.ui.today;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.RadioGroup;
 import dagger.hilt.android.AndroidEntryPoint;
 import stas.batura.stepteacker.MainViewModel;
 import stas.batura.stepteacker.R;
+import stas.batura.stepteacker.data.room.Day;
 import stas.batura.stepteacker.databinding.TodayFragmentBinding;
 
 @AndroidEntryPoint
@@ -32,15 +35,7 @@ public class TodayFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private PressureAdapter adapter;
-
-//    private RecyclerView recyclerRainView;
-//
-//    private RainAdapter rainAdapter;
-
-    private Button stopButton;
-
-    private RadioGroup radioGroup;
+//    private PressureAdapter adapter;
 
     public static TodayFragment newInstance() {
         return new TodayFragment();
@@ -65,6 +60,8 @@ public class TodayFragment extends Fragment {
         return binding.getRoot();
     }
 
+
+
     @Override
     public void onStart() {
         super.onStart();
@@ -77,10 +74,18 @@ public class TodayFragment extends Fragment {
 //        removeObservers();
     }
 
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        fragmentModel.getSteps().observe(getViewLifecycleOwner(), new Observer<Day>() {
+            @Override
+            public void onChanged(Day day) {
+                if (day != null) {
+                    Log.d(TAG, "onChanged: " + day.toString());
+                }
+            }
+        });
+
         super.onViewCreated(view, savedInstanceState);
 
     }

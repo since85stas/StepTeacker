@@ -40,7 +40,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class StepService @Inject constructor(
-    val repository: Repository
+
 ): LifecycleService(), SensorEventListener {
 
     /**
@@ -65,6 +65,8 @@ class StepService @Inject constructor(
     private var timeCount: Long = -10L
 
     @Inject lateinit var sensorManager: SensorManager
+
+    @Inject lateinit var repository: Repository
 
 //    @Inject lateinit var repository: Repository
 
@@ -95,7 +97,6 @@ class StepService @Inject constructor(
     override fun onCreate() {
         super.onCreate()
         val deviceSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
-
 
         startForeground(NOTIFICATION_ID, getNotification())
         Log.d(TAG, "onCreate: " + deviceSensors)
