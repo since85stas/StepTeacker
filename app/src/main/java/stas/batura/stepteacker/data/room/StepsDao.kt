@@ -17,4 +17,7 @@ interface StepsDao {
 
     @Query("SELECT * FROM days_table")
     fun getDaySteps(): Flow<Day>
+
+    @Query("SELECT * FROM days_table WHERE date =:day")
+    fun getDay(day: String): Day?
 }

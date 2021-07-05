@@ -29,7 +29,12 @@ class RepositoryImpl @Inject constructor(
 
     override fun updateDaySteps(steps: Int, date: String) {
         repScope.launch {
-            stepDao.updateDaySteps(steps, date)
+            val day = stepDao.getDay(date)
+            if (day == null) {
+                stepDao.insertDay(Day(date, steps))
+            } else {
+                stepDao.updateDaySteps(steps, date)
+            }
         }
     }
 
