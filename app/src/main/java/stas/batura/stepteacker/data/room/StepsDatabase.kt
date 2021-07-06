@@ -32,7 +32,7 @@ import java.util.concurrent.Executors
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities =[Day::class, CommonParams::class], version = 2, exportSchema = false)
+@Database(entities =[Day::class, CommonParams::class], version = 3, exportSchema = false)
 abstract class StepsDatabase : RoomDatabase() {
 
     /**
@@ -50,8 +50,6 @@ abstract class StepsDatabase : RoomDatabase() {
         /**
          * INSTANCE will keep a reference to any database returned via getInstance.
          *
-         * This will help us avoid repeatedly initializing the database, which is expensive.
-         *
          *  The value of a volatile variable will never be cached, and all writes and
          *  reads will be done to and from the main memory. It means that changes made by one
          *  thread to shared data are visible to other threads.
@@ -67,14 +65,6 @@ abstract class StepsDatabase : RoomDatabase() {
          *
          * This function is threadsafe, and callers should cache the result for multiple database
          * calls to avoid overhead.
-         *
-         * This is an example of a simple Singleton pattern that takes another Singleton as an
-         * argument in Kotlin.
-         *
-         * To learn more about Singleton read the wikipedia article:
-         * https://en.wikipedia.org/wiki/Singleton_pattern
-         *
-         * @param context The application context Singleton, used to get access to the filesystem.
          */
         fun getInstance(context: Context): StepsDatabase {
             // Multiple threads can ask for the database at the same time, ensure we only initialize
@@ -84,9 +74,9 @@ abstract class StepsDatabase : RoomDatabase() {
                 val rdc: Callback = object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         Log.d("room","dab created")
-//                        val rain = Rain(0)
-//                        Executors.newSingleThreadScheduledExecutor()
-//                                .execute(Runnable { INSTANCE!!.stepsDatabaseDao.insertRain(rain)})
+                        val commonParams = CommonParams(0, "",10000)
+                        Executors.newSingleThreadScheduledExecutor()
+                                .execute(Runnable { INSTANCE!!.stepsDatabaseDao.insertParams(commonParams)})
                     }
 
                     override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
@@ -109,10 +99,6 @@ abstract class StepsDatabase : RoomDatabase() {
                             StepsDatabase::class.java,
                             "lessons_history_database"
                     )
-                            // Wipes and rebuilds instead of migrating if no Migration object.
-                            // Migration is not part of this lesson. You can learn more about
-                            // migration with Room in this blog post:
-                            // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
                             .fallbackToDestructiveMigration()
                             .addCallback(rdc)
                             .build()
