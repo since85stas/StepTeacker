@@ -142,30 +142,6 @@
             android:layout_height="200dp"
             />
 
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/testbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> mainViewModel.testSave()}"
-            android:layout_margin="12dp"
-            android:text="test save"
-            />
-
-<!--        <Button-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="12dp"-->
-<!--            android:text="crash"-->
-<!--            android:onClick="@{() -> mainViewModel.crash() }"-->
-<!--            />-->
-
-<!--        <com.anychart.AnyChartView-->
-<!--            android:id="@+id/any_chart"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="300dp"-->
-<!--            />-->
 
     </LinearLayout>
 </layout>

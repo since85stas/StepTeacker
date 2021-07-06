@@ -9,19 +9,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import stas.batura.stepteacker.data.IRep
-import stas.batura.stepteacker.data.room.Pressure
+import stas.batura.stepteacker.data.Repository
 import stas.batura.stepteacker.service.StepService
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import java.util.*
 
-class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
 
     private val TAG = MainViewModel::class.simpleName
 
     var serviceConnection: MutableLiveData<ServiceConnection?> = MutableLiveData()
-
-    var lastDayPressures: MutableLiveData<List<Pressure>?> = MutableLiveData(null)
 
     private var playerServiceBinder: StepService.PressureServiceBinder? = null
 
@@ -30,7 +27,7 @@ class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewMod
         get() = _stopServiceLive
 
     init {
-        createService()
+//        createService()
     }
 
     /**
@@ -39,7 +36,6 @@ class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewMod
     fun createService() {
 
         if (serviceConnection.value == null) {
-
             // соединение с сервисом
             serviceConnection.value = object : ServiceConnection {
                 override fun onServiceConnected(name: ComponentName, service: IBinder) {
@@ -78,68 +74,10 @@ class MainViewModel @ViewModelInject constructor(val repository: IRep) : ViewMod
         _stopServiceLive.value = true
     }
 
-    fun setServiceRain(rainp: Int) {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.setRainPower(rainp)
-        }
-    }
-
-    /**
-     * saving value in DB
-     */
-    fun savePressureValue() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.savePressure()
-        }
-    }
-
-    fun combibeData() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.savePressure()
-        }
-    }
-
-    fun getLastDayData(): Calendar? {
-        if (playerServiceBinder != null) {
-            return playerServiceBinder!!.getLastDayBeg()
-        }
-        return null
-    }
-
-    fun testSave() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.testWrite()
-        }
-    }
-
-//    fun testLoc() {
-//        if (playerServiceBinder != null) {
-//            playerServiceBinder!!.testLocation()
-//        }
-//    }
-
-    fun testRx() {
-        if (playerServiceBinder != null) {
-            playerServiceBinder!!.testRx()
-        }
-    }
-
     fun updateNotif() {
         if (playerServiceBinder != null) {
             playerServiceBinder!!.updateNotif()
         }
     }
 
-    fun getDayPressuresValue() {
-        val day = getLastDayData()
-        if (day != null) {
-            val pressures = repository.getPressuresInInterval(day.timeInMillis,
-                    getCurrentDayEnd(day).timeInMillis)
-            lastDayPressures.value = pressures
-        }
-    }
-
-    fun crash() {
-        throw RuntimeException("Test Crash");
-    }
 }

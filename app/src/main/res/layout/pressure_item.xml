@@ -2,9 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable
-            name="pressure"
-            type="stas.batura.stepteacker.data.room.Pressure" />
     </data>
 
     <LinearLayout
@@ -13,30 +10,6 @@
         android:layout_height="wrap_content"
 
         >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            pressureTextBind="@{pressure}"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="12dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="today"
-            timeBind="@{pressure}"
-            android:layout_marginEnd="12dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            rainPowBind="@{pressure}"
-            android:layout_marginEnd="12dp"
-            />
 
     </LinearLayout>
 </layout>
