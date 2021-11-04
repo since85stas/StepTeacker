@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import stas.batura.stepteacker.data.Repository
 
-class TodayFragment @ViewModelInject constructor(
+class TodayViewModel @ViewModelInject constructor(
     val repository: Repository
         ) : ViewModel() {
 
-    val steps = repository.getDaySteps().asLiveData()
+    val days = repository.getDaySteps().asLiveData()
 
 }

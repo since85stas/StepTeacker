@@ -20,10 +20,6 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
 
     private var playerServiceBinder: StepService.ServiceBinder? = null
 
-    private var _stopServiceLive: MutableLiveData<Boolean> = MutableLiveData(false)
-    val stopServiceLive: LiveData<Boolean>
-        get() = _stopServiceLive
-
     init {
 //        createService()
     }
@@ -62,14 +58,6 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
         if (playerServiceBinder != null) {
             playerServiceBinder!!.closeService()
         }
-        _stopServiceLive.value = false
-    }
-
-    /**
-     * sending command to unbind and close service
-     */
-    fun stopService() {
-        _stopServiceLive.value = true
     }
 
     fun updateNotif() {

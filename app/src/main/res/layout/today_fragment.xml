@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="stas.batura.stepteacker.ui.today.TodayFragment" />
+            type="stas.batura.stepteacker.ui.today.TodayViewModel" />
     </data>
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="24sp"
-            setStepCount="@{viewModel.steps.steps}"
+            setStepCount="@{viewModel.days.steps}"
             />
 
     </LinearLayout>

@@ -40,8 +40,6 @@ import stas.batura.stepteacker.service.StepService;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = MainActivity.this.getPackageName();
-
     public final int EXTERNAL_READ_PERMISSION_GRANT = 112;
 
     public final int PHYISCAL_ACTIVITY = 11;
@@ -81,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        ServiceConnection conn = mainViewModel.getServiceConnection().getValue();
+        if ( conn != null) {
+            unbindService(conn);
+        }
         removeObservers();
     }
 
@@ -104,16 +106,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mainViewModel.getStopServiceLive().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean && mainViewModel.getServiceConnection().getValue() != null) {
-                    unbindService(mainViewModel.getServiceConnection().getValue());
-
-                    mainViewModel.closeService();
-                }
-            }
-        });
     }
 
     /**
@@ -121,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void removeObservers() {
         mainViewModel.getServiceConnection().removeObservers(this);
-        mainViewModel.getStopServiceLive().removeObservers(this);
     }
 
     /**

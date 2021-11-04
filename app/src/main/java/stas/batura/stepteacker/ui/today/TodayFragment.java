@@ -27,7 +27,7 @@ public class TodayFragment extends Fragment {
 
     private static final String TAG = TodayFragment.class.getSimpleName();
 
-    private TodayFragment fragmentModel;
+    private TodayViewModel fragmentModel;
 
     private MainViewModel mainViewModel;
 
@@ -44,7 +44,7 @@ public class TodayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        fragmentModel = new ViewModelProvider(this).get(TodayFragment.class);
+        fragmentModel = new ViewModelProvider(this).get(TodayViewModel.class);
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
@@ -74,16 +74,6 @@ public class TodayFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        fragmentModel.getSteps().observe(getViewLifecycleOwner(), new Observer<Day>() {
-            @Override
-            public void onChanged(Day day) {
-                if (day != null) {
-                    Log.d(TAG, "onChanged: " + day.toString());
-                }
-            }
-        });
-
         super.onViewCreated(view, savedInstanceState);
 
     }
