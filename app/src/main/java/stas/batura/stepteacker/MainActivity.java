@@ -40,7 +40,7 @@ import stas.batura.stepteacker.service.StepService;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = "MainActivity.this.getPackageName()";
+    private final String TAG = MainActivity.this.getPackageName();
 
     public final int EXTERNAL_READ_PERMISSION_GRANT = 112;
 

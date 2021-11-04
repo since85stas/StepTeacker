@@ -11,9 +11,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
@@ -23,16 +20,12 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.functions.Consumer
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import stas.batura.stepteacker.MainActivity
 import stas.batura.stepteacker.data.Repository
-import stas.batura.stepteacker.rx.chess.ClockRx
-import stas.batura.stepteacker.rx.chess.ClockStateChageListner
-import stas.batura.stepteacker.rx.rxZipper.Container
 import stas.batura.stepteacker.utils.*
 import java.util.*
 import javax.inject.Inject
@@ -73,9 +66,6 @@ class StepService @Inject constructor(
     // pressure sensor installed
     private var sensor: Sensor? = null
 
-    // Declaring a Location Manager
-    @Inject lateinit var locationManager: LocationManager
-
     init {
         serviceScope.launch {
             fakeSteps.collect {
@@ -111,8 +101,8 @@ class StepService @Inject constructor(
     override fun onBind(intent: Intent): IBinder? {
         super.onBind(intent)
                 Log.d(TAG, "servise is bind " + intent.toString())
-        this.PressureServiceBinder().isBind = true
-        return PressureServiceBinder()
+        this.ServiceBinder().isBind = true
+        return ServiceBinder()
     }
 
     /**
@@ -120,7 +110,7 @@ class StepService @Inject constructor(
      */
     override fun onUnbind(intent: Intent?): Boolean {
         Log.d(TAG, "servise is unbind " + intent.toString())
-        this.PressureServiceBinder().isBind = false
+        this.ServiceBinder().isBind = false
         return super.onUnbind(intent)
     }
 
@@ -249,7 +239,7 @@ class StepService @Inject constructor(
     /**
      * create a service binder
      */
-    inner class PressureServiceBinder : Binder() {
+    inner class ServiceBinder : Binder() {
 
         var isBind: Boolean = false
 

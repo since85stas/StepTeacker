@@ -11,8 +11,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import stas.batura.stepteacker.data.Repository
 import stas.batura.stepteacker.service.StepService
-import stas.batura.stepteacker.utils.getCurrentDayEnd
-import java.util.*
 
 class MainViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
 
@@ -20,7 +18,7 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
 
     var serviceConnection: MutableLiveData<ServiceConnection?> = MutableLiveData()
 
-    private var playerServiceBinder: StepService.PressureServiceBinder? = null
+    private var playerServiceBinder: StepService.ServiceBinder? = null
 
     private var _stopServiceLive: MutableLiveData<Boolean> = MutableLiveData(false)
     val stopServiceLive: LiveData<Boolean>
@@ -40,7 +38,7 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
             serviceConnection.value = object : ServiceConnection {
                 override fun onServiceConnected(name: ComponentName, service: IBinder) {
                     try {
-                        playerServiceBinder = service as StepService.PressureServiceBinder
+                        playerServiceBinder = service as StepService.ServiceBinder
 
                         updateNotif()
                     } catch (e: RemoteException) {
