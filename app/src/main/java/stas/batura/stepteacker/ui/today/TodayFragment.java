@@ -15,8 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.RadioGroup;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import stas.batura.stepteacker.MainViewModel;
@@ -29,7 +27,7 @@ public class TodayFragment extends Fragment {
 
     private static final String TAG = TodayFragment.class.getSimpleName();
 
-    private MainFragmentViewModel fragmentModel;
+    private TodayFragment fragmentModel;
 
     private MainViewModel mainViewModel;
 
@@ -46,7 +44,7 @@ public class TodayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        fragmentModel = new ViewModelProvider(this).get(MainFragmentViewModel.class);
+        fragmentModel = new ViewModelProvider(this).get(TodayFragment.class);
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 

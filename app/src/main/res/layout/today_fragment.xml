@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="stas.batura.stepteacker.ui.today.MainFragmentViewModel" />
+            type="stas.batura.stepteacker.ui.today.TodayFragment" />
     </data>
 
     <LinearLayout
