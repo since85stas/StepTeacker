@@ -66,18 +66,25 @@ class StepService @Inject constructor(
     // pressure sensor installed
     private var sensor: Sensor? = null
 
-    init {
-        serviceScope.launch {
-            fakeSteps.collect {
-                repository.updateDaySteps(steps = it, "1")
-            }
-        }
-    }
-
     private val fakeSteps: Flow<Int> = flow {
         for (i in 1..1000) {
             delay(5000) // pretend we are doing something useful here
             emit(i) // emit next value
+        }
+    }
+
+    init {
+        collectStepsNumber(fakeSteps)
+    }
+
+    /**
+     * собирает данные о шагах из источника и сохраняет в БД
+      */
+    private fun collectStepsNumber(steps: Flow<Int>) {
+        serviceScope.launch {
+            steps.collect {
+                repository.updateDaySteps(steps = it, "1")
+            }
         }
     }
 

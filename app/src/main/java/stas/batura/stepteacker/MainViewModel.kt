@@ -6,11 +6,11 @@ import android.os.IBinder
 import android.os.RemoteException
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import stas.batura.stepteacker.data.Repository
 import stas.batura.stepteacker.service.StepService
+
 
 class MainViewModel @ViewModelInject constructor(val repository: Repository) : ViewModel() {
 
@@ -21,13 +21,13 @@ class MainViewModel @ViewModelInject constructor(val repository: Repository) : V
     private var playerServiceBinder: StepService.ServiceBinder? = null
 
     init {
-//        createService()
+//        createServiceConnection()
     }
 
     /**
      * creating our service and getting connection
      */
-    fun createService() {
+    fun createServiceConnection() {
 
         if (serviceConnection.value == null) {
             // соединение с сервисом

@@ -59,21 +59,15 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.main_activity);
 
-        mainViewModel.createService();
-
-//        if(ContextCompat.checkSelfPermission(this,
-//                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
-//            //ask for permission
-//
-//            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, PHYISCAL_ACTIVITY);
-//        }
-
+        startService();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         addObservers();
+
+        mainViewModel.createServiceConnection();
     }
 
     @Override
@@ -113,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void removeObservers() {
         mainViewModel.getServiceConnection().removeObservers(this);
+    }
+
+    private void startService(){
+        Intent serviceIntent = new Intent(this, StepService.class);
+        startService(serviceIntent);
     }
 
     /**

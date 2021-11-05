@@ -22,8 +22,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTask">
+>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +33,7 @@
         <service
             android:name=".service.StepService"
             android:exported="false"
-            android:foregroundServiceType="dataSync"></service>
+            ></service>
     </application>
 
 </manifest>
