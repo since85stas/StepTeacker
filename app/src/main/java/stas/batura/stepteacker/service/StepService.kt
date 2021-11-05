@@ -34,7 +34,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StepService @Inject constructor(
 
-): LifecycleService(), SensorEventListener {
+): LifecycleService() {
 
     /**
      * Job allows us to cancel all coroutines started by this ViewModel.
@@ -82,8 +82,9 @@ class StepService @Inject constructor(
       */
     private fun collectStepsNumber(steps: Flow<Int>) {
         serviceScope.launch {
-            steps.collect {
-                repository.updateDaySteps(steps = it, "1")
+            steps.collect { steps ->
+                Log.d(TAG, "collectStepsNumber: $steps")
+                repository.updateDaySteps(steps = steps, getTimeFormatString(Calendar.getInstance()))
             }
         }
     }
@@ -124,59 +125,9 @@ class StepService @Inject constructor(
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy: ")
-        unregisterListn()
+        serviceJob.cancel()
     }
 
-    /**
-     * initianing a sensor manager
-     */
-    private fun initPressSensor() {
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) != null) {
-            val gravSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_PRESSURE)
-            // Use the version 3 gravity sensor.
-            sensor = gravSensors.firstOrNull()
-        } else {
-            Toast.makeText(applicationContext, "Sensor not detected", Toast.LENGTH_LONG).show()
-        }
-
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-    }
-
-    /**
-     * getting a value from sensor
-     */
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event != null) {
-            val pressure = event.values
-            unregisterListn()
-            if (pressure.size > 0) {
-//                zipper.generatePress(pressure[0])
-            }
-        }
-    }
-
-    /**
-     * registring from sensor
-     */
-    private fun registerListn() {
-
-        if (sensor != null) {
-            sensor?.also { light ->
-                sensorManager.registerListener(this, light, 100000)
-            }
-        } else {
-            Log.d(TAG, "registerListn: null" )
-        }
-    }
-
-    /**
-     * unregistring from sensor
-     */
-    private fun unregisterListn() {
-        sensorManager.unregisterListener(this)
-    }
 
     /**
      * create a Notification object

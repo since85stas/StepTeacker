@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.graph_fragment.*
 import stas.batura.stepteacker.MainViewModel
 import stas.batura.stepteacker.R
 import stas.batura.stepteacker.databinding.GraphFragmentBinding
-import stas.batura.stepteacker.utils.getCurrentDayBegin
 
 
 @AndroidEntryPoint
@@ -40,8 +39,6 @@ class GraphFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        val time = getCurrentDayBegin()
 
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
