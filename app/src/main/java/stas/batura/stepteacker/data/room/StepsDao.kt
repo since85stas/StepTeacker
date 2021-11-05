@@ -22,8 +22,13 @@ interface StepsDao {
     fun getDaySteps(): Flow<Day>
 
     @Query("SELECT * FROM days_table WHERE date =:day")
+    fun getDaySteps(day: String): Flow<Day>
+
+    @Query("SELECT * FROM days_table WHERE date =:day")
     fun getDay(day: String): Day?
 
+    @Query("DELETE FROM days_table")
+    fun dropTable()
 }
 
 @Dao
@@ -36,5 +41,5 @@ interface ParamsDao {
     fun updateCurrentDay(date: String)
 
     @Query("SELECT * FROM params_table WHERE id=0")
-    suspend fun getPsrams(): CommonParams
+    suspend fun getStepsByDay(): CommonParams
 }
