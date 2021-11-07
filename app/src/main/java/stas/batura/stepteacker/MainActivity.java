@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 //        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         setContentView(R.layout.main_activity);
-
         startService();
     }
 
