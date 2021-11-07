@@ -23,6 +23,8 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
         val navController = navHostFragment.navController
 
         setupActionBarWithNavController(navController)
+
+        startService()
     }
 
     override fun onStart() {
