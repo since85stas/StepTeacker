@@ -17,10 +17,12 @@ import stas.batura.stepteacker.service.StepService
 @AndroidEntryPoint
 class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
 
-    val mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+    lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -29,7 +31,7 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
         val navView: BottomNavigationView = nav_view
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_graph
+                R.id.todayFragment, R.id.graphFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

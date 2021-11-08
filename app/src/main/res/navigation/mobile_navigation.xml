@@ -9,7 +9,6 @@
     <fragment
         android:id="@+id/graphFragment"
         android:name="stas.batura.stepteacker.ui.graph.GraphFragment"
-        android:label="control_fragment"
         tools:layout="@layout/graph_fragment" >
         <action
             android:id="@+id/action_graphFragment_to_listFragment"
@@ -20,7 +19,6 @@
     <fragment
         android:id="@+id/todayFragment"
         android:name="stas.batura.stepteacker.ui.today.TodayFragment"
-        android:label="PlaylistFragment"
         tools:layout="@layout/today_fragment"
 
         >
