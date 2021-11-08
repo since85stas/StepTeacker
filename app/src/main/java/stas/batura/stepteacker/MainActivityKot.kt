@@ -22,21 +22,13 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // получаем вью модель
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        // определяем контроллер
+        configureNavigController()
 
-        val navController = navHostFragment.navController
-        val navView: BottomNavigationView = nav_view
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.todayFragment, R.id.graphFragment
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
+        // стартуем сервис
         startService()
 
 
@@ -55,6 +47,24 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
             unbindService(conn)
         }
         removeObservers()
+    }
+
+    /**
+     * задаем контроллер и bottom navigation
+     */
+    private fun configureNavigController() {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        val navController = navHostFragment.navController
+        val navView: BottomNavigationView = nav_view
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.todayFragment, R.id.graphFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     /**
