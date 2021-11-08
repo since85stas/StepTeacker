@@ -6,12 +6,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import stas.batura.stepteacker.data.room.Day
-import stas.batura.stepteacker.data.room.RoomI
+import stas.batura.stepteacker.data.room.Database
 import javax.inject.Inject
 
 
 class RepositoryImpl @Inject constructor(
-    val stepDao: RoomI
+    val stepDao: Database
 ): Repository {
 
     private var stepsLastSavedValue = 0
@@ -49,6 +49,9 @@ class RepositoryImpl @Inject constructor(
         return stepDao.getDaySteps(dateString)
     }
 
+    /**
+     * очищаем данные о шагах
+     */
     override fun dropStepsTable() {
         stepDao.dropTable()
     }

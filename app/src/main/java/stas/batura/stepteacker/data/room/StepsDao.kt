@@ -7,7 +7,7 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface RoomI: StepsDao, ParamsDao
+interface Database: StepsDao, ParamsDao
 
 @Dao
 interface StepsDao {

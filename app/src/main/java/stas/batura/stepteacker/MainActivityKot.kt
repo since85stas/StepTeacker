@@ -6,8 +6,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.main_activity.*
 import stas.batura.stepteacker.service.StepService
 
 @AndroidEntryPoint
@@ -20,11 +24,20 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
 
-        setupActionBarWithNavController(navController)
+        val navController = navHostFragment.navController
+        val navView: BottomNavigationView = nav_view
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_graph
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
         startService()
+
+
     }
 
     override fun onStart() {

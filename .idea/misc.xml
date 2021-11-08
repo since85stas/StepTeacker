@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/_progs/Android/StepTeacker/app/src/main/res/drawable-v24/ic_dashboard_black_24dp.xml" value="0.382051282051282" />
+        <entry key="..\:/_progs/Android/StepTeacker/app/src/main/res/drawable-v24/ic_home_black_24dp.xml" value="0.382051282051282" />
+        <entry key="..\:/_progs/Android/StepTeacker/app/src/main/res/drawable-v24/ic_notifications_black_24dp.xml" value="0.382051282051282" />
         <entry key="..\:/_progs/Android/StepTeacker/app/src/main/res/layout/main_activity.xml" value="0.18085106382978725" />
         <entry key="..\:/_progs/Android/StepTeacker/app/src/main/res/layout/today_fragment.xml" value="0.18659420289855072" />
         <entry key="..\:/_progs/Android/StepTeacker/app/src/main/res/menu/bottom_nav_menu.xml" value="0.371875" />

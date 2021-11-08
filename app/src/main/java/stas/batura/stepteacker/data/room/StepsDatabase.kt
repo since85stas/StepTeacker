@@ -39,7 +39,7 @@ abstract class StepsDatabase : RoomDatabase() {
     /**
      * Connects the database to the DAO.
      */
-    abstract val stepsDatabaseDao: RoomI
+    abstract val stepsDatabaseDao: stas.batura.stepteacker.data.room.Database
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.
