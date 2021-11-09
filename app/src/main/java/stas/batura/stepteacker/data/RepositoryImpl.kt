@@ -53,6 +53,8 @@ class RepositoryImpl @Inject constructor(
      * очищаем данные о шагах
      */
     override fun dropStepsTable() {
-        stepDao.dropTable()
+        repScope.launch {
+            stepDao.dropTable()
+        }
     }
 }
