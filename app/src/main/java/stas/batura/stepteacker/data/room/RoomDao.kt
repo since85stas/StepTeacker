@@ -1,16 +1,15 @@
 package stas.batura.stepteacker.data.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface Database: StepsDao, ParamsDao
+interface Database: DaysDao, ParamsDao, StepsDao
 
 @Dao
-interface StepsDao {
+interface DaysDao {
 
     @Insert
     fun insertDay(day: Day)
@@ -29,6 +28,13 @@ interface StepsDao {
 
     @Query("DELETE FROM days_table")
     fun dropTable()
+
+
+
+}
+
+@Dao
+interface StepsDao {
 
     @Insert
     fun insertStepNum(step: Step)
