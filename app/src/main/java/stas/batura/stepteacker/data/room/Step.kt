@@ -3,15 +3,14 @@ package stas.batura.stepteacker.data.room
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "days_table")
-data class Day (
+@Entity(tableName = "steps_table")
+data class Step(
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0L,
 
-        @PrimaryKey()
-        var date: String = "",
+    var dateInMillis: Long = 0L,
 
-        var steps: Int = 0
-
+    var steps: Int = 0
 )
-
 {
 }

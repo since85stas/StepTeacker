@@ -33,7 +33,7 @@ import java.util.concurrent.Executors
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities =[Day::class, CommonParams::class], version = 3, exportSchema = false)
+@Database(entities =[Day::class, CommonParams::class, Step::class], version = 3, exportSchema = false)
 abstract class StepsDatabase : RoomDatabase() {
 
     /**
