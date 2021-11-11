@@ -29,6 +29,13 @@ interface StepsDao {
 
     @Query("DELETE FROM days_table")
     fun dropTable()
+
+    @Insert
+    fun insertStepNum(step: Step)
+
+    @Query("SELECT * FROM steps_table")
+    fun getAllSteps(): Flow<List<Step>>
+
 }
 
 @Dao
