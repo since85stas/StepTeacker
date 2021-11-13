@@ -85,6 +85,8 @@ class StepService @Inject constructor(
             steps.collect { steps ->
                 Log.d(TAG, "collectStepsNumber: $steps")
                 repository.updateDaySteps(steps = steps, getTimeFormatString(Calendar.getInstance()))
+
+                repository.addNewSteps(steps = steps, date = Calendar.getInstance().timeInMillis)
             }
         }
     }

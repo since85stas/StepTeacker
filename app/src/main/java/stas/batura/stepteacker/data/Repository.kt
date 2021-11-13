@@ -10,4 +10,6 @@ interface Repository {
     fun getDaySteps(dateString: String): Flow<Day>
 
     fun dropStepsTable()
+
+    fun addNewSteps(steps: Int, date: Long)
 }

@@ -7,11 +7,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import stas.batura.stepteacker.data.room.Day
 import stas.batura.stepteacker.data.room.Database
+import stas.batura.stepteacker.data.room.Step
 import javax.inject.Inject
 
 
 class RepositoryImpl @Inject constructor(
-    val stepDao: Database
+    val roomDao: Database
 ): Repository {
 
     private var stepsLastSavedValue = 0
@@ -21,24 +22,35 @@ class RepositoryImpl @Inject constructor(
     private val repScope = CoroutineScope(Dispatchers.IO + repositoryJob)
 
     /**
-     * обновляем данные о дне
+     * обновляем данные о дне - сохраняем количество шагов за этот день.
      */
     override fun updateDaySteps(newSteps: Int, date: String) {
         repScope.launch {
-            val day = stepDao.getDay(date)
+            val day = roomDao.getDay(date)
             if (day == null) {
-                stepDao.insertDay(Day(date, newSteps))
+                roomDao.insertDay(Day(date, newSteps))
             } else {
                 val oldSteps = day.steps
 
                 if (newSteps > oldSteps) {
-                    stepDao.updateDaySteps(newSteps, date)
+                    roomDao.updateDaySteps(newSteps, date)
                     stepsLastSavedValue = 0
                 } else {
                     if (stepsLastSavedValue == 0) stepsLastSavedValue = oldSteps
-                    stepDao.updateDaySteps(stepsLastSavedValue + newSteps, date)
+                    roomDao.updateDaySteps(stepsLastSavedValue + newSteps, date)
                 }
             }
+        }
+    }
+
+    override fun addNewSteps(steps: Int, date: Long) {
+        repScope.launch {
+            roomDao.insertStepNum(
+                Step(
+                    steps = steps,
+                    dateInMillis = date
+                )
+            )
         }
     }
 
@@ -46,7 +58,7 @@ class RepositoryImpl @Inject constructor(
      * получаем данные о дне на конкретную дату
      */
     override fun getDaySteps(dateString: String): Flow<Day> {
-        return stepDao.getDaySteps(dateString)
+        return roomDao.getDaySteps(dateString)
     }
 
     /**
@@ -54,7 +66,7 @@ class RepositoryImpl @Inject constructor(
      */
     override fun dropStepsTable() {
         repScope.launch {
-            stepDao.dropTable()
+            roomDao.dropTable()
         }
     }
 }
