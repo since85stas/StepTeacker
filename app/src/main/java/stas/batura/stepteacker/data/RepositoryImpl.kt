@@ -54,6 +54,11 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+
+    override fun getDaysList(date: String): Flow<List<Step>> {
+        return roomDao.getAllSteps()
+    }
+
     /**
      * получаем данные о дне на конкретную дату
      */

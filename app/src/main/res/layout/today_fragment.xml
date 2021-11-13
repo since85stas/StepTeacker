@@ -13,7 +13,8 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="top"
+        android:layout_marginStart="36dp"
         android:orientation="vertical"
         tools:context=".ui.today.TodayFragment">
 
@@ -25,6 +26,12 @@
             setStepCount="@{viewModel.days.steps}"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            setStepCountList="@{viewModel.dayhistory}"
+            />
         <Button
             android:text="drop"
             android:id="@+id/drop_button"

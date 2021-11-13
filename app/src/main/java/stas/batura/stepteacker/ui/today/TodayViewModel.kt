@@ -13,6 +13,8 @@ class TodayViewModel @ViewModelInject constructor(
 
     val days = repository.getDaySteps(getTimeFormatString(Calendar.getInstance())).asLiveData()
 
+    val dayhistory = repository.getDaysList(getTimeFormatString(Calendar.getInstance())).asLiveData()
+
     fun dropStepsTabale() {
         repository.dropStepsTable()
     }
