@@ -8,17 +8,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-
 @BindingAdapter("setStepCount")
 fun TextView.setStepCount(steps: Int) {
     text = steps.toString()
 }
 
 @BindingAdapter("setStepCountList")
-fun TextView.setStepCount(list: List<Step>) {
-    val stringBuilder = StringBuilder()
-    for (step in list) {
-        stringBuilder.append(step.steps).append(" ")
+fun TextView.setStepCount(list: List<Step>?) {
+    list?.apply {
+        val stringBuilder = StringBuilder()
+        for (step in this) {
+            stringBuilder.append(step.steps).append(" ")
+        }
+        text = stringBuilder.toString()
     }
-    text = stringBuilder.toString()
 }
