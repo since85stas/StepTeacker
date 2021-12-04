@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 import stas.batura.stepteacker.data.room.Day
 import stas.batura.stepteacker.data.room.Database
 import stas.batura.stepteacker.data.room.Step
+import stas.batura.stepteacker.utils.getCurrentDayBegin
+import stas.batura.stepteacker.utils.getCurrentDayEnd
 import javax.inject.Inject
 
 
@@ -56,7 +58,11 @@ class RepositoryImpl @Inject constructor(
 
 
     override fun getDaysList(date: String): Flow<List<Step>> {
-        return roomDao.getAllSteps()
+        val calDayBegin = getCurrentDayBegin()
+        return roomDao.getStepsFortimeInterval(
+            calDayBegin.timeInMillis,
+            getCurrentDayEnd(calDayBegin).timeInMillis
+        )
     }
 
     /**
