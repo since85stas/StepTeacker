@@ -91,6 +91,45 @@ class DaysCalculationTests {
         assertEquals(8 + 6, getStepsInDay(steps))
     }
 
+    @Test
+    fun steps_record_three_intervals_count_isCorrect() {
+        val steps = mutableListOf<Step>(
+            Step(steps = 11),
+            Step(steps = 15),
+            Step(steps = 17),
+            Step(steps = 28),
+
+            Step(steps = 0),
+            Step(steps = 4),
+            Step(steps = 5),
+            Step(steps = 6),
+
+            Step(steps = 0),
+            Step(steps = 4),
+            Step(steps = 5),
+            Step(steps = 6),
+        )
+        assertEquals(17 + 6 + 6, getStepsInDay(steps))
+    }
+
+    @Test
+    fun steps_record_null_count_isCorrect() {
+        val steps = mutableListOf<Step>(
+            Step(steps = 0),
+
+        )
+        assertEquals(0, getStepsInDay(steps))
+    }
+
+    @Test
+    fun steps_record_1000_count_isCorrect() {
+        val steps = mutableListOf<Step>(
+            Step(steps = 1000),
+
+            )
+        assertEquals(0, getStepsInDay(steps))
+    }
+
 //    @Test
 //    fun steps_byPlusFrom_from111_count_isCorrect() {
 //        val steps = mutableListOf<Step>(
