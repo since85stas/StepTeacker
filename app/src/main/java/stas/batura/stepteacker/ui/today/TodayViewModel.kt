@@ -3,7 +3,10 @@ package stas.batura.stepteacker.ui.today
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import stas.batura.stepteacker.data.Repository
+import stas.batura.stepteacker.data.logic.getStepsInDay
 import stas.batura.stepteacker.utils.getTimeFormatString
 import java.util.*
 
@@ -13,7 +16,11 @@ class TodayViewModel @ViewModelInject constructor(
 
     val days = repository.getDaySteps(getTimeFormatString(Calendar.getInstance())).asLiveData()
 
-    val dayhistory = repository.getDaysList(getTimeFormatString(Calendar.getInstance())).asLiveData()
+    private val dayhistory = repository.getDaysList(getTimeFormatString(Calendar.getInstance()))
+
+    val stepsForDayFromList = dayhistory.map {
+        getStepsInDay(it)
+    }.asLiveData()
 
     fun dropStepsTabale() {
         repository.dropStepsTable()
