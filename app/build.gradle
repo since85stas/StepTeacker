@@ -112,4 +112,5 @@ dependencies {
     // Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha01"
 
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.0'
 }
