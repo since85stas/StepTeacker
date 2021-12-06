@@ -14,6 +14,8 @@ import stas.batura.stepteacker.utils.getCurrentDayBegin
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import javax.inject.Inject
 
+// интервал через который проверяем обновление количества шагов
+const val STEPS_CHECK_TIME_INTERVAL = 5000L
 
 class RepositoryImpl @Inject constructor(
     val roomDao: Database
@@ -64,7 +66,7 @@ class RepositoryImpl @Inject constructor(
         return flow {
             while (true) {
                 val calDayBegin = getCurrentDayBegin()
-                kotlinx.coroutines.delay(200)
+                kotlinx.coroutines.delay(STEPS_CHECK_TIME_INTERVAL)
                 Log.d("TAG", "getDaysList: emit")
                 emit (roomDao.getStepsFortimeInterval(
                     calDayBegin.timeInMillis,

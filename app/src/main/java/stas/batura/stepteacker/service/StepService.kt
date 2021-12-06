@@ -68,7 +68,7 @@ class StepService @Inject constructor(
 
     private val fakeSteps: Flow<Int> = flow {
         for (i in 1..1000) {
-            delay(5000) // pretend we are doing something useful here
+            delay(2000) // pretend we are doing something useful here
             emit(i) // emit next value
         }
     }
