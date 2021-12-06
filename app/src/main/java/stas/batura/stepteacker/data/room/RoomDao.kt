@@ -43,7 +43,10 @@ interface StepsDao {
     fun getAllSteps(): Flow<List<Step>>
 
     @Query("SELECT * FROM steps_table WHERE dateInMillis BETWEEN :dayStartTime AND :dayEndTime ORDER BY id")
-    fun getStepsFortimeInterval(dayStartTime: Long, dayEndTime: Long): Flow<List<Step>>
+    fun getStepsFortimeIntervalFlow(dayStartTime: Long, dayEndTime: Long): Flow<List<Step>>
+
+    @Query("SELECT * FROM steps_table WHERE dateInMillis BETWEEN :dayStartTime AND :dayEndTime ORDER BY id")
+    suspend fun getStepsFortimeInterval(dayStartTime: Long, dayEndTime: Long): List<Step>
 }
 
 @Dao

@@ -1,9 +1,11 @@
 package stas.batura.stepteacker.data
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import stas.batura.stepteacker.data.room.Day
 import stas.batura.stepteacker.data.room.Database
@@ -58,11 +60,18 @@ class RepositoryImpl @Inject constructor(
 
 
     override fun getDaysList(date: String): Flow<List<Step>> {
-        val calDayBegin = getCurrentDayBegin()
-        return roomDao.getStepsFortimeInterval(
-            calDayBegin.timeInMillis,
-            getCurrentDayEnd(calDayBegin).timeInMillis
-        )
+
+        return flow {
+            while (true) {
+                val calDayBegin = getCurrentDayBegin()
+                kotlinx.coroutines.delay(200)
+                Log.d("TAG", "getDaysList: emit")
+                emit (roomDao.getStepsFortimeInterval(
+                    calDayBegin.timeInMillis,
+                    getCurrentDayEnd(calDayBegin).timeInMillis
+                ))
+            }
+        }
     }
 
     /**
