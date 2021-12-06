@@ -63,6 +63,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_lifecycle_extensions"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle_extensions"
+    // ViewModel
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
