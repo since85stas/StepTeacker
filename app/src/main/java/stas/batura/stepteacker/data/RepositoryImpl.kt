@@ -1,12 +1,18 @@
 package stas.batura.stepteacker.data
 
 import android.util.Log
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.Preferences
+import androidx.datastore.preferences.preferencesKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import stas.batura.stepteacker.data.pref.PreferencesScheme
 import stas.batura.stepteacker.data.room.Day
 import stas.batura.stepteacker.data.room.Database
 import stas.batura.stepteacker.data.room.Step
@@ -18,7 +24,8 @@ import javax.inject.Inject
 const val STEPS_CHECK_TIME_INTERVAL = 5000L
 
 class RepositoryImpl @Inject constructor(
-    val roomDao: Database
+    val roomDao: Database,
+    val prefs: DataStore<Preferences>
 ): Repository {
 
     private var stepsLastSavedValue = 0
@@ -89,6 +96,12 @@ class RepositoryImpl @Inject constructor(
     override fun dropStepsTable() {
         repScope.launch {
             roomDao.dropTable()
+        }
+    }
+
+    fun getPrefsStepsLimit(): Flow<Int> {
+        return prefs.data.map {it->
+                it[PreferencesScheme.FIELD_STEP_LIMIT] ?: 0
         }
     }
 }
