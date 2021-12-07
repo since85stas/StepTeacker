@@ -14,5 +14,9 @@ interface Repository {
 
     fun addNewSteps(steps: Int, date: Long)
 
-    fun getDaysList(date: String): Flow<List<Step>>
+    fun getDaysList(): Flow<List<Step>>
+
+    fun getPrefsStepsLimit(): Flow<Int>
+
+    fun setPrefsStepsLimit(limit: Int)
 }

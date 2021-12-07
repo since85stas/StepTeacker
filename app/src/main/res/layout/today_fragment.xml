@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="24sp"
-            setStepCount="@{viewModel.days.steps}"
+            setStepCount="@{viewModel.daysLimit}"
             />
 
         <TextView

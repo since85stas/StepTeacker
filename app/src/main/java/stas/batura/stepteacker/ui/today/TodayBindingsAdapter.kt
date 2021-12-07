@@ -13,6 +13,11 @@ fun TextView.setStepCount(steps: Int) {
     text = steps.toString()
 }
 
+@BindingAdapter("setStepLimit")
+fun TextView.setStepLimit(steps: Int) {
+    text = steps.toString()
+}
+
 @BindingAdapter("setStepCountList")
 fun TextView.setStepCount(list: List<Step>?) {
     list?.apply {

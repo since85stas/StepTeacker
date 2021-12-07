@@ -3,6 +3,7 @@ package stas.batura.stepteacker.data
 import android.util.Log
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences
+import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -68,7 +69,7 @@ class RepositoryImpl @Inject constructor(
     }
 
 
-    override fun getDaysList(date: String): Flow<List<Step>> {
+    override fun getDaysList(): Flow<List<Step>> {
 
         return flow {
             while (true) {
@@ -99,9 +100,17 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
-    fun getPrefsStepsLimit(): Flow<Int> {
+    override fun getPrefsStepsLimit(): Flow<Int> {
         return prefs.data.map {it->
-                it[PreferencesScheme.FIELD_STEP_LIMIT] ?: 0
+                it[PreferencesScheme.FIELD_STEP_LIMIT] ?: 10000
+        }
+    }
+
+    override fun setPrefsStepsLimit(limit: Int) {
+        repScope.launch {
+            prefs.edit {
+                it[PreferencesScheme.FIELD_STEP_LIMIT] = limit
+            }
         }
     }
 }

@@ -19,7 +19,9 @@ class TodayViewModel @ViewModelInject constructor(
 
     val days = repository.getDaySteps(getTimeFormatString(Calendar.getInstance())).asLiveData()
 
-    private val dayhistory = repository.getDaysList(getTimeFormatString(Calendar.getInstance()))
+    val daysLimit = repository.getPrefsStepsLimit().asLiveData()
+
+    private val dayhistory = repository.getDaysList()
 
     val viewModelJob = Job()
     val viewModelScope = CoroutineScope(Dispatchers.IO + viewModelJob)
