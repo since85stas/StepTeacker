@@ -34,7 +34,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StepService @Inject constructor(
 
-): LifecycleService() {
+): LifecycleService(), SensorEventListener {
 
     /**
      * Job allows us to cancel all coroutines started by this ViewModel.
@@ -61,9 +61,9 @@ class StepService @Inject constructor(
 
     @Inject lateinit var repository: Repository
 
-//    @Inject lateinit var repository: Repository
+    private val isFake = true
 
-    // pressure sensor installed
+    // step sensor installed
     private var sensor: Sensor? = null
 
     private val fakeSteps: Flow<Int> = flow {
@@ -73,8 +73,59 @@ class StepService @Inject constructor(
         }
     }
 
+
     init {
-        collectStepsNumber(fakeSteps)
+        if (isFake) {
+            collectStepsNumber(fakeSteps)
+        } else {
+            registerListn()
+        }
+    }
+
+    /**
+     * получаем сенсор
+     */
+    private fun initStepSensor() {
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+            val gravSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_STEP_COUNTER)
+            // Use the version 3 gravity sensor.
+            sensor = gravSensors.firstOrNull()
+        } else {
+            Toast.makeText(applicationContext, "Step sensor not detected", Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    /**
+     * registring from sensor
+     */
+    private fun registerListn() {
+
+        if (sensor != null) {
+            sensor?.also { light ->
+                sensorManager.registerListener(this, light, 1000)
+            }
+        } else {
+        }
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        event?.let { event ->
+            val steps = event.values
+            Log.d(TAG, "onSensorChanged: $steps")
+            collectStepsNumber(steps.first().toInt())
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        Log.d(TAG, "onAccuracyChanged: $sensor, $accuracy")
+    }
+
+    /**
+     * unregistring from sensor
+     */
+    private fun unregisterListn() {
+        sensorManager.unregisterListener(this)
     }
 
     /**
@@ -88,6 +139,18 @@ class StepService @Inject constructor(
 
                 repository.addNewSteps(steps = steps, date = Calendar.getInstance().timeInMillis)
             }
+        }
+    }
+
+    /**
+     * собирает данные о шагах из источника и сохраняет в БД
+     */
+    private fun collectStepsNumber(steps: Int) {
+        serviceScope.launch {
+                Log.d(TAG, "collectStepsNumber: $steps")
+                repository.updateDaySteps(steps = steps, getTimeFormatString(Calendar.getInstance()))
+
+                repository.addNewSteps(steps = steps, date = Calendar.getInstance().timeInMillis)
         }
     }
 
