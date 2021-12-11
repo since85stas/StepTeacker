@@ -5,14 +5,11 @@ import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import stas.batura.stepteacker.data.pref.PreferencesScheme
 import stas.batura.stepteacker.data.room.Day
 import stas.batura.stepteacker.data.room.Database
@@ -74,7 +71,7 @@ class RepositoryImpl @Inject constructor(
         return flow {
             while (true) {
                 val calDayBegin = getCurrentDayBegin()
-                kotlinx.coroutines.delay(STEPS_CHECK_TIME_INTERVAL)
+                delay(STEPS_CHECK_TIME_INTERVAL)
                 Log.d("TAG", "getDaysList: emit")
                 emit (roomDao.getStepsFortimeInterval(
                     calDayBegin.timeInMillis,

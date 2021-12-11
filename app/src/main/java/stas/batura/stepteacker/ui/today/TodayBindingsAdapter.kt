@@ -18,13 +18,3 @@ fun TextView.setStepLimit(steps: Int) {
     text = steps.toString()
 }
 
-@BindingAdapter("setStepCountList")
-fun TextView.setStepCount(list: List<Step>?) {
-    list?.apply {
-        val stringBuilder = StringBuilder()
-        for (step in this) {
-            stringBuilder.append(step.steps).append(" ")
-        }
-        text = stringBuilder.toString()
-    }
-}
