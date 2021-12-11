@@ -51,7 +51,7 @@ class StepService @Inject constructor(
 
     private val NOTIFICATION_ID = 21
 
-    private val CHANNEL_ID = "PressCh"
+    private val CHANNEL_ID = "StepCh"
 
     // interval between saves in seconds
     private val INTERVAL = 60L * 5
@@ -79,6 +79,7 @@ class StepService @Inject constructor(
         if (isFake) {
             collectStepsNumber(fakeSteps)
         } else {
+            initStepSensor()
             registerListn()
         }
     }
@@ -98,7 +99,7 @@ class StepService @Inject constructor(
     }
 
     /**
-     * registring from sensor
+     * подключсакемся к сенсору
      */
     private fun registerListn() {
 
@@ -194,6 +195,7 @@ class StepService @Inject constructor(
         super.onDestroy()
         Log.d(TAG, "onDestroy: ")
         serviceJob.cancel()
+        unregisterListn()
     }
 
 
