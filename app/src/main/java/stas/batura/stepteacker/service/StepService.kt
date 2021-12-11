@@ -30,6 +30,7 @@ import stas.batura.stepteacker.utils.*
 import java.util.*
 import javax.inject.Inject
 
+private val STEPS_SENSOR_DELAY_TIME = 1000
 
 @AndroidEntryPoint
 class StepService @Inject constructor(
@@ -102,8 +103,10 @@ class StepService @Inject constructor(
     private fun registerListn() {
 
         if (sensor != null) {
-            sensor?.also { light ->
-                sensorManager.registerListener(this, light, 1000)
+            sensor?.also { sensor ->
+                sensorManager.registerListener(this, sensor,
+                    SensorManager.SENSOR_DELAY_NORMAL,
+                    STEPS_SENSOR_DELAY_TIME)
             }
         } else {
         }
