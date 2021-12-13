@@ -73,11 +73,14 @@ class GraphFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
     }
 
 
     private fun addObservers() {
-
+        graphViewModel.stepsList.observe(viewLifecycleOwner) {list ->
+            Log.d(TAG, "onViewCreated: ")
+        }
     }
 
     private fun removeObservers() {

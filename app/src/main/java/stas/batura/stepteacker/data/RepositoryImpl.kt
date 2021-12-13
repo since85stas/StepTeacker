@@ -19,7 +19,7 @@ import stas.batura.stepteacker.utils.getCurrentDayEnd
 import javax.inject.Inject
 
 // интервал через который проверяем обновление количества шагов
-const val STEPS_CHECK_TIME_INTERVAL = 5000L
+const val STEPS_CHECK_TIME_INTERVAL = 10000L
 
 class RepositoryImpl @Inject constructor(
     val roomDao: Database,

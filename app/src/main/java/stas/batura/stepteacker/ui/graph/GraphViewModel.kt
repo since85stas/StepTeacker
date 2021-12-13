@@ -10,4 +10,5 @@ class GraphViewModel @ViewModelInject constructor(private var repository: Reposi
     // массив шагов за текущий день
     val stepsList = repository.getDaysList().asLiveData()
 
+
 }
