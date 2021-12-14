@@ -36,6 +36,8 @@ class GraphFragment: Fragment() {
 
     private var isStarted = false
 
+    lateinit var binding: GraphFragmentBinding
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -44,10 +46,7 @@ class GraphFragment: Fragment() {
 
         graphViewModel = ViewModelProvider(this).get(GraphViewModel::class.java)
 //        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        val binding: GraphFragmentBinding = DataBindingUtil.inflate(inflater,
-                R.layout.graph_fragment,
-                container,
-                false)
+
 
         binding.graphModel = graphViewModel
         binding.mainViewModel = mainViewModel
@@ -73,13 +72,16 @@ class GraphFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding = GraphFragmentBinding.bind(view)
     }
 
 
     private fun addObservers() {
         graphViewModel.stepsList.observe(viewLifecycleOwner) {list ->
             Log.d(TAG, "onViewCreated: ")
+            binding.apply {
+                listText.text = list.toString()
+            }
         }
     }
 
