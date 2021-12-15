@@ -71,12 +71,12 @@ class RepositoryImpl @Inject constructor(
         return flow {
             while (true) {
                 val calDayBegin = getCurrentDayBegin()
-                delay(STEPS_CHECK_TIME_INTERVAL)
                 Log.d("TAG", "getDaysList: emit")
                 emit (roomDao.getStepsFortimeInterval(
                     calDayBegin.timeInMillis,
                     getCurrentDayEnd(calDayBegin).timeInMillis
                 ))
+                delay(STEPS_CHECK_TIME_INTERVAL)
             }
         }
     }

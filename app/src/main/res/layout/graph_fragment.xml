@@ -30,6 +30,7 @@
             android:id="@+id/list_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            setStepCountList="@{graphModel.stepsList}"
             />
 
         <com.jjoe64.graphview.GraphView
