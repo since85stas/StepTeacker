@@ -37,12 +37,6 @@ fun getStepsSequenceInDay(steps: List<Step>): IntArray {
                 stepsDel[i] = stepsDel[i-1]!! + steps[i+1].steps
             }
         }
-        var sum = 0
-        for (del in stepsDel) {
-            if ( del > 0) {
-                sum = sum + del
-            }
-        }
         return stepsDel
     } else {
         return intArrayOf(0)
