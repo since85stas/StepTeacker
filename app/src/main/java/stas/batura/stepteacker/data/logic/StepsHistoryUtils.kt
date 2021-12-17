@@ -29,16 +29,17 @@ fun getStepsInDay(steps: List<Step>): Int {
 fun getStepsSequenceInDay(steps: List<Step>): IntArray {
     if (steps.size > 1) {
         val stepsDel = IntArray(steps.size-1) {0}
-        for (i in 0 until steps.size - 1) {
+        stepsDel[0] = steps[1].steps - steps[0].steps
+        for (i in 1 until steps.size - 1) {
             if (steps[i+1].steps > steps[i].steps) {
-                stepsDel[i] = steps[i + 1].steps - steps[i].steps
+                stepsDel[i] = stepsDel[i-1] + steps[i + 1].steps - steps[i].steps
             } else {
                 stepsDel[i] = stepsDel[i-1]!! + steps[i+1].steps
             }
         }
         var sum = 0
         for (del in stepsDel) {
-            if (del != null && del > 0) {
+            if ( del > 0) {
                 sum = sum + del
             }
         }
