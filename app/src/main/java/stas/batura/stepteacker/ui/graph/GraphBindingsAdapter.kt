@@ -15,3 +15,14 @@ fun TextView.setStepCountList(list: List<Step>?) {
         text = stringBuilder.toString()
     }
 }
+
+@BindingAdapter("setStepCountListInt")
+fun TextView.setStepCountListInt(list: List<Int>?) {
+    list?.apply {
+        val stringBuilder = StringBuilder()
+        for (step in this) {
+            stringBuilder.append(step).append(" ")
+        }
+        text = stringBuilder.toString()
+    }
+}

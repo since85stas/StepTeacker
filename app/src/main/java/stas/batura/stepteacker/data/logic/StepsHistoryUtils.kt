@@ -26,7 +26,7 @@ fun getStepsInDay(steps: List<Step>): Int {
 /**
  * Вычисление непрерывного распределения изменения шагов по Steps из Бд.
  */
-fun getStepsSequenceInDay(steps: List<Step>): IntArray {
+fun getStepsSequenceInDay(steps: List<Step>): List<Int> {
     if (steps.size > 1) {
         val stepsDel = IntArray(steps.size-1) {0}
         stepsDel[0] = steps[1].steps - steps[0].steps
@@ -37,8 +37,8 @@ fun getStepsSequenceInDay(steps: List<Step>): IntArray {
                 stepsDel[i] = stepsDel[i-1]!! + steps[i+1].steps
             }
         }
-        return stepsDel
+        return stepsDel.toList()
     } else {
-        return intArrayOf(0)
+        return intArrayOf(0).toList()
     }
 }
