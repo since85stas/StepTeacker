@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import stas.batura.stepteacker.MainViewModel
 import stas.batura.stepteacker.R
 import stas.batura.stepteacker.databinding.GraphFragmentBinding
+import stas.batura.stepteacker.databinding.HistoryFragmentBinding
 import stas.batura.stepteacker.ui.graph.GraphViewModel
 
 @AndroidEntryPoint
@@ -19,11 +20,11 @@ class HistoryFragment: Fragment() {
 
     private val TAG = HistoryFragment::class.java.simpleName
 
-    private lateinit var graphViewModel: GraphViewModel
+    private lateinit var historyViewModel: HistoryViewModel
 
     private lateinit var mainViewModel: MainViewModel
 
-    lateinit var binding: GraphFragmentBinding
+    lateinit var binding: HistoryFragmentBinding
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -31,17 +32,16 @@ class HistoryFragment: Fragment() {
 
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-        graphViewModel = ViewModelProvider(this).get(GraphViewModel::class.java)
+        historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 //        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-        val binding: GraphFragmentBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.graph_fragment,
+            R.layout.history_fragment,
             container,
             false
         )
-        binding.graphModel = graphViewModel
-        binding.mainViewModel = mainViewModel
+        binding.historyViewModel = historyViewModel
         binding.setLifecycleOwner(viewLifecycleOwner)
         return binding.root
     }
@@ -58,7 +58,6 @@ class HistoryFragment: Fragment() {
     override fun onStop() {
         super.onStop()
         removeObservers()
-        isStarted = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,12 +68,6 @@ class HistoryFragment: Fragment() {
 
 
     private fun addObservers() {
-//        graphViewModel.stepsList.observe(viewLifecycleOwner) {list ->
-//            Log.d(TAG, "onViewCreated: ")
-//            binding.apply {
-//                listText.text = list.toString()
-//            }
-//        }
     }
 
     private fun removeObservers() {
