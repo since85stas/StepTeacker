@@ -16,6 +16,8 @@ import stas.batura.stepteacker.data.room.Database
 import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.utils.getCurrentDayBegin
 import stas.batura.stepteacker.utils.getCurrentDayEnd
+import stas.batura.stepteacker.utils.getDayBegin
+import java.util.*
 import javax.inject.Inject
 
 // интервал через который проверяем обновление количества шагов
@@ -103,11 +105,23 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * сохраняем лимит в шагах на день в настройках
+     */
     override fun setPrefsStepsLimit(limit: Int) {
         repScope.launch {
             prefs.edit {
                 it[PreferencesScheme.FIELD_STEP_LIMIT] = limit
             }
         }
+    }
+
+    /**
+     * Получаем список записей о количестве шагов, от какого-то времени за кол-во дней
+     * @param Calendar - время от которого будем считать шаги, по нему вычисляется начало дня
+     * @param periodInDays - количество дней которые берм назад от дня опредленного в currentTime
+     */
+    fun getStepsListForDays(currentTime: Calendar, periodInDays: Int) {
+        val dayBegin = getDayBegin(currentTime)
     }
 }

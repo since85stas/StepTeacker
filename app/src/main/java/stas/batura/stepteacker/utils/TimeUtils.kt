@@ -19,6 +19,14 @@ fun getCurrentDayBegin(): Calendar {
     return calendar
 }
 
+fun getDayBegin(calendar: Calendar): Calendar {
+    var calendarNew: Calendar = calendar.clone() as Calendar
+    calendarNew.set(Calendar.HOUR_OF_DAY, 0)
+    calendarNew.set(Calendar.MINUTE, 0)
+    calendarNew.set(Calendar.SECOND, 10)
+    return calendarNew
+}
+
 fun getCurrentDayEnd(calendar: Calendar): Calendar {
     var calendarNew: Calendar = calendar.clone() as Calendar
     calendarNew.set(Calendar.HOUR_OF_DAY, 23)
