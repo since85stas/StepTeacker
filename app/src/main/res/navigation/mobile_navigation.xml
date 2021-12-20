@@ -27,5 +27,13 @@
             app:destination="@id/graphFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="stas.batura.stepteacker.ui.history.HistoryFragment"
+        tools:layout="@layout/history_fragment"
+
+        >
+    </fragment>
+
 
 </navigation>

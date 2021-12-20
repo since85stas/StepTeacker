@@ -60,7 +60,7 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
         val navView: BottomNavigationView = nav_view
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.todayFragment, R.id.graphFragment
+                R.id.todayFragment, R.id.graphFragment, R.id.historyFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
