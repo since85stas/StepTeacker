@@ -4,12 +4,12 @@
     <item
         android:id="@+id/todayFragment"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:title="@string/title_today" />
 
     <item
         android:id="@+id/graphFragment"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_graph" />
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_notifications"-->
