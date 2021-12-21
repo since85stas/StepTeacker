@@ -42,3 +42,14 @@ fun getStepsSequenceInDay(steps: List<Step>): List<Int> {
         return intArrayOf(0).toList()
     }
 }
+
+/**
+ * Вычисление непрерывного распределения изменения шагов по Steps из Бд.
+ */
+fun getStepsSequenceInDaysPeriod(steps: List<List<Step>>): List<Int> {
+    val daysCountList = mutableListOf<Int>()
+    for (list in steps) {
+        daysCountList.add(getStepsInDay(list))
+    }
+    return daysCountList
+}
