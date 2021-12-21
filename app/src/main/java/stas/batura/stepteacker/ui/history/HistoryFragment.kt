@@ -1,6 +1,7 @@
 package stas.batura.stepteacker.ui.history
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +69,11 @@ class HistoryFragment: Fragment() {
 
 
     private fun addObservers() {
+
+        historyViewModel.daysHistory.observe(viewLifecycleOwner) {days ->
+            Log.d(TAG, "addObservers: $days")
+        }
+
     }
 
     private fun removeObservers() {

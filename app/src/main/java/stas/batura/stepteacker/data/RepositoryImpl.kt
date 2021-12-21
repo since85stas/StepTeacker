@@ -17,6 +17,7 @@ import stas.batura.stepteacker.data.room.Step
 import stas.batura.stepteacker.utils.getCurrentDayBegin
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import stas.batura.stepteacker.utils.getDayBegin
+import stas.batura.stepteacker.utils.getPreviousDayBegin
 import java.util.*
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ const val STEPS_CHECK_TIME_INTERVAL = 10000L
 class RepositoryImpl @Inject constructor(
     val roomDao: Database,
     val prefs: DataStore<Preferences>
-): Repository {
+) : Repository {
 
     private var stepsLastSavedValue = 0
 
@@ -74,10 +75,12 @@ class RepositoryImpl @Inject constructor(
             while (true) {
                 val calDayBegin = getCurrentDayBegin()
                 Log.d("TAG", "getDaysList: emit")
-                emit (roomDao.getStepsFortimeInterval(
-                    calDayBegin.timeInMillis,
-                    getCurrentDayEnd(calDayBegin).timeInMillis
-                ))
+                emit(
+                    roomDao.getStepsFortimeInterval(
+                        calDayBegin.timeInMillis,
+                        getCurrentDayEnd(calDayBegin).timeInMillis
+                    )
+                )
                 delay(STEPS_CHECK_TIME_INTERVAL)
             }
         }
@@ -100,8 +103,8 @@ class RepositoryImpl @Inject constructor(
     }
 
     override fun getPrefsStepsLimit(): Flow<Int> {
-        return prefs.data.map {it->
-                it[PreferencesScheme.FIELD_STEP_LIMIT] ?: 10000
+        return prefs.data.map { it ->
+            it[PreferencesScheme.FIELD_STEP_LIMIT] ?: 10000
         }
     }
 
@@ -121,7 +124,23 @@ class RepositoryImpl @Inject constructor(
      * @param Calendar - время от которого будем считать шаги, по нему вычисляется начало дня
      * @param periodInDays - количество дней которые берм назад от дня опредленного в currentTime
      */
-    fun getStepsListForDays(currentTime: Calendar, periodInDays: Int) {
-        val dayBegin = getDayBegin(currentTime)
+    override fun getStepsListForDays(currentTime: Calendar, periodInDays: Int): Flow<List<List<Step>>> {
+
+        return flow {
+            var dayBegin = getDayBegin(currentTime)
+
+            val daysList = mutableListOf<List<Step>>()
+
+            for (i in 0 until periodInDays) {
+                val daySteps = roomDao.getStepsFortimeInterval(
+                    getDayBegin(dayBegin).timeInMillis,
+                    getCurrentDayEnd(dayBegin).timeInMillis
+                )
+                daysList.add(daySteps)
+
+                dayBegin = getPreviousDayBegin(dayBegin)
+            }
+            emit(daysList)
+        }
     }
 }

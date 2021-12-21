@@ -3,6 +3,7 @@ package stas.batura.stepteacker.data
 import kotlinx.coroutines.flow.Flow
 import stas.batura.stepteacker.data.room.Day
 import stas.batura.stepteacker.data.room.Step
+import java.util.*
 
 interface Repository {
 
@@ -19,4 +20,6 @@ interface Repository {
     fun getPrefsStepsLimit(): Flow<Int>
 
     fun setPrefsStepsLimit(limit: Int)
+
+    fun getStepsListForDays(currentTime: Calendar, periodInDays: Int): Flow<List<List<Step>>>
 }

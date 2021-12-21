@@ -27,6 +27,15 @@ fun getDayBegin(calendar: Calendar): Calendar {
     return calendarNew
 }
 
+fun getPreviousDayBegin(calendar: Calendar): Calendar {
+    var calendarNew: Calendar = calendar.clone() as Calendar
+    calendarNew.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR)-1)
+    calendarNew.set(Calendar.HOUR_OF_DAY, 0)
+    calendarNew.set(Calendar.MINUTE, 0)
+    calendarNew.set(Calendar.SECOND, 10)
+    return calendarNew
+}
+
 fun getCurrentDayEnd(calendar: Calendar): Calendar {
     var calendarNew: Calendar = calendar.clone() as Calendar
     calendarNew.set(Calendar.HOUR_OF_DAY, 23)
