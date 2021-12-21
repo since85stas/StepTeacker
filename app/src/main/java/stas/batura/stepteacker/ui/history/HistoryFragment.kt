@@ -73,7 +73,11 @@ class HistoryFragment: Fragment() {
         historyViewModel.daysHistory.observe(viewLifecycleOwner) {days ->
             Log.d(TAG, "addObservers: $days")
         }
+        
+        historyViewModel.daysHistoryCount.observe(viewLifecycleOwner) {
+            Log.d(TAG, "addObservers: $it")
 
+        }
     }
 
     private fun removeObservers() {
