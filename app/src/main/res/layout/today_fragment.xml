@@ -40,5 +40,9 @@
             android:onClick="@{() -> viewModel.dropStepsTabale()}"
             />
 
+        <stas.batura.stepteacker.ui.custom.CustomRectContainer
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </layout>

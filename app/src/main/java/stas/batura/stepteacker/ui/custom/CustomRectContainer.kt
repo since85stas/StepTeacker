@@ -1,10 +1,7 @@
 package stas.batura.stepteacker.ui.custom
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 
@@ -14,13 +11,13 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     // Some colors for the face background, eyes and mouth.
-    private var faceColor = Color.YELLOW
+    private var bordOuterColor = Color.BLACK
     private var eyesColor = Color.BLACK
     private var mouthColor = Color.BLACK
-    private var borderColor = Color.BLACK
+    private var bordInnerColor = Color.BLACK
 
     // Face border width in pixels
-    private var borderWidth = 4.0f
+    private var borderWidth = 4
 
     // View size in pixels
     private var size = 320
@@ -30,29 +27,34 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         super.onDraw(canvas)
 
         drawFaceBackground(canvas)
-        drawEyes(canvas)
+//        drawEyes(canvas)
         drawMouth(canvas)
     }
 
 
     private fun drawFaceBackground(canvas: Canvas) {
         // 1
-        paint.color = faceColor
-        paint.style = Paint.Style.FILL
+        paint.color = bordOuterColor
+        paint.style = Paint.Style.STROKE
 
         // 2
         val radius = size / 2f
 
         // 3
-        canvas.drawCircle(size / 2f, size / 2f, radius, paint)
+//        canvas.drawCircle(size / 2f, size / 2f, radius, paint)
+        val rectOuter = Rect(0,0,size,size)
+        canvas.drawRect(rectOuter, paint)
 
         // 4
-        paint.color = borderColor
+        paint.color = bordInnerColor
         paint.style = Paint.Style.STROKE
-        paint.strokeWidth = borderWidth
+        paint.strokeWidth = borderWidth*1.0f
+
+        val rectInner = Rect(borderWidth,borderWidth,size-borderWidth,size-borderWidth)
+        canvas.drawRect(rectInner, paint)
 
         // 5
-        canvas.drawCircle(size / 2f, size / 2f, radius - borderWidth / 2f, paint)
+//        canvas.drawCircle(size*1.0f, size*1.0f, radius *2, paint)
 
     }
 
