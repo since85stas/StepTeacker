@@ -32,6 +32,7 @@
             android:textSize="18sp"
             setStepCount="@{viewModel.stepsForDayFromList}"
             />
+
         <Button
             android:text="drop"
             android:id="@+id/drop_button"
@@ -42,7 +43,9 @@
 
         <stas.batura.stepteacker.ui.custom.CustomRectContainer
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="6dp" />
 
     </LinearLayout>
 </layout>

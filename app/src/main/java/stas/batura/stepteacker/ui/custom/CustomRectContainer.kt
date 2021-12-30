@@ -31,6 +31,13 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         drawMouth(canvas)
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        // 1
+        size = Math.min(measuredWidth, measuredHeight)
+// 2
+        setMeasuredDimension(size, size)
+    }
 
     private fun drawFaceBackground(canvas: Canvas) {
         // 1
@@ -50,7 +57,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = borderWidth*1.0f
 
-        val rectInner = Rect(5+borderWidth,5+borderWidth,size-borderWidth,size-borderWidth)
+        val rectInner = Rect(15+borderWidth,15+borderWidth,size-borderWidth,size-borderWidth)
         canvas.drawRect(rectInner, paint)
 
         // 5
