@@ -14,10 +14,10 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     private var bordOuterColor = Color.BLACK
     private var eyesColor = Color.BLACK
     private var mouthColor = Color.BLACK
-    private var bordInnerColor = Color.BLACK
+    private var bordInnerColor = Color.RED
 
     // Face border width in pixels
-    private var borderWidth = 4
+    private var borderWidth = 10
 
     // View size in pixels
     private var size = 320
@@ -42,7 +42,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
 
         // 3
 //        canvas.drawCircle(size / 2f, size / 2f, radius, paint)
-        val rectOuter = Rect(0,0,size,size)
+        val rectOuter = Rect(5,5,size,size)
         canvas.drawRect(rectOuter, paint)
 
         // 4
@@ -50,7 +50,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = borderWidth*1.0f
 
-        val rectInner = Rect(borderWidth,borderWidth,size-borderWidth,size-borderWidth)
+        val rectInner = Rect(5+borderWidth,5+borderWidth,size-borderWidth,size-borderWidth)
         canvas.drawRect(rectInner, paint)
 
         // 5
