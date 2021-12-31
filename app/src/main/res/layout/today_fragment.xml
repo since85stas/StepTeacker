@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
-        android:layout_marginStart="36dp"
+        android:layout_margin="12dp"
         android:orientation="vertical"
         tools:context=".ui.today.TodayFragment">
 
@@ -44,8 +44,6 @@
         <stas.batura.stepteacker.ui.custom.CustomRectContainer
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:padding="6dp"
             app:fillColor="@color/colorAccent"
             />
 
