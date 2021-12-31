@@ -1,7 +1,6 @@
 package stas.batura.stepteacker.ui.today;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,6 @@ import android.view.ViewGroup;
 import dagger.hilt.android.AndroidEntryPoint;
 import stas.batura.stepteacker.MainViewModel;
 import stas.batura.stepteacker.R;
-import stas.batura.stepteacker.data.room.Day;
 import stas.batura.stepteacker.databinding.TodayFragmentBinding;
 
 @AndroidEntryPoint
@@ -27,7 +24,7 @@ public class TodayFragment extends Fragment {
 
     private static final String TAG = TodayFragment.class.getSimpleName();
 
-    private TodayViewModel fragmentModel;
+    private TodayViewModel todayViewModel;
 
     private MainViewModel mainViewModel;
 
@@ -44,7 +41,7 @@ public class TodayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        fragmentModel = new ViewModelProvider(this).get(TodayViewModel.class);
+        todayViewModel = new ViewModelProvider(this).get(TodayViewModel.class);
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
@@ -52,7 +49,7 @@ public class TodayFragment extends Fragment {
                 R.layout.today_fragment,
                 container,
                 false);
-        binding.setViewModel(fragmentModel);
+        binding.setViewModel(todayViewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
         return binding.getRoot();
@@ -81,7 +78,13 @@ public class TodayFragment extends Fragment {
      * adding observers
      */
     private void  addObservers() {
+        todayViewModel.getStepsForDayFromList().observe(getViewLifecycleOwner(),
+                count -> {
 
+                }
+                );{
+
+        }
     }
 
 

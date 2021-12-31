@@ -3,15 +3,17 @@ package stas.batura.stepteacker.ui.custom
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import stas.batura.stepteacker.R
+import java.lang.reflect.Array.set
 
 class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, attrs) {
 
     companion object {
         private const val DEFAULT_FILL_COLOR = Color.YELLOW
         private const val DEFAULT_BORDER_COLOR = Color.BLACK
-        private const val DEFAULT_STEP_LIMIT = 10000
+        private const val DEFAULT_STEP_LIMIT = 3000
         private const val DEFAULT_CURRENT_STEPS = 1000
     }
 
@@ -23,14 +25,26 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     private var fillerColor = DEFAULT_FILL_COLOR
 
     // Face border width in pixels
-    private var borderWidth = 2*0.01f
+    private var borderWidth = 3*0.01f
 
     // View size in pixels
     private var size = 320
 
     private var stepsLimint = DEFAULT_STEP_LIMIT
 
-    private var currentSteps = DEFAULT_CURRENT_STEPS
+    var currentSteps = DEFAULT_CURRENT_STEPS
+        set(value) {
+            field = value
+            invalidate()
+        }
+//    private var stepsInvalidate: Int =
+
+
+    init {
+        setupAttributes(attrs)
+    }
+
+//    private fun setValue(v: Int)
 
     private fun setupAttributes(attrs: AttributeSet?) {
         // 6
@@ -45,6 +59,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         fillerColor = typedArray.getColor(R.styleable.CustomRectContainer_fillColor, DEFAULT_FILL_COLOR)
         stepsLimint = typedArray.getColor(R.styleable.CustomRectContainer_stepLimit, DEFAULT_STEP_LIMIT)
         currentSteps = typedArray.getColor(R.styleable.CustomRectContainer_currentSteps, DEFAULT_CURRENT_STEPS)
+
         // 8
         // TypedArray objects are shared and must be recycled.
         typedArray.recycle()
@@ -53,6 +68,8 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     override fun onDraw(canvas: Canvas) {
         // call the super method to keep any drawing from the parent side.
         super.onDraw(canvas)
+
+        drawFiller(canvas)
 
         drawBoarder(canvas)
 //        drawEyes(canvas)
@@ -86,6 +103,21 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         // 5
 //        canvas.drawCircle(size*1.0f, size*1.0f, radius *2, paint)
 
+    }
+
+    private fun drawFiller(canvas: Canvas) {
+        paint.color = fillerColor
+        paint.style = Paint.Style.FILL
+
+        // 2
+        val fillRect = Rect(0,(calculetFillerHeight()*size).toInt(),size,size)
+        canvas.drawRect(fillRect, paint)
+    }
+
+    private fun calculetFillerHeight(): Float {
+        val del = currentSteps.toFloat()/stepsLimint.toFloat()
+        Log.d("custom", "calculetFillerHeight: $del")
+        return del
     }
 
     private fun drawEyes(canvas: Canvas) {
