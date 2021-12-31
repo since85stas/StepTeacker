@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import stas.batura.stepteacker.R
 
 class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, attrs) {
 
@@ -27,11 +28,33 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     // View size in pixels
     private var size = 320
 
+    private var stepsLimint = DEFAULT_STEP_LIMIT
+
+    private var currentSteps = DEFAULT_CURRENT_STEPS
+
+    private fun setupAttributes(attrs: AttributeSet?) {
+        // 6
+        // Obtain a typed array of attributes
+
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.CustomRectContainer,
+            0, 0)
+
+        // 7
+        // Extract custom attributes into member variables
+        bordOuterColor = typedArray.getColor(R.styleable.CustomRectContainer_borderColor, DEFAULT_BORDER_COLOR)
+        fillerColor = typedArray.getColor(R.styleable.CustomRectContainer_fillColor, DEFAULT_FILL_COLOR)
+        stepsLimint = typedArray.getColor(R.styleable.CustomRectContainer_stepLimit, DEFAULT_STEP_LIMIT)
+        currentSteps = typedArray.getColor(R.styleable.CustomRectContainer_currentSteps, DEFAULT_CURRENT_STEPS)
+        // 8
+        // TypedArray objects are shared and must be recycled.
+        typedArray.recycle()
+    }
+
     override fun onDraw(canvas: Canvas) {
         // call the super method to keep any drawing from the parent side.
         super.onDraw(canvas)
 
-        drawFaceBackground(canvas)
+        drawBoarder(canvas)
 //        drawEyes(canvas)
         drawMouth(canvas)
     }
@@ -44,7 +67,10 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         setMeasuredDimension(size, size)
     }
 
-    private fun drawFaceBackground(canvas: Canvas) {
+    /**
+     * рисуем границу
+     */
+    private fun drawBoarder(canvas: Canvas) {
         // 1
         paint.color = bordOuterColor
         paint.style = Paint.Style.STROKE
