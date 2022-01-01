@@ -88,7 +88,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet?): View(context,
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         // 1
-        size = Math.min(measuredWidth/2, measuredHeight/2)
+//        size = Math.min(measuredWidth, measuredHeight)
 // 2
         setMeasuredDimension(size, size)
     }

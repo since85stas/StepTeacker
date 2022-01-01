@@ -30,7 +30,7 @@ import stas.batura.stepteacker.utils.*
 import java.util.*
 import javax.inject.Inject
 
-private val STEPS_SENSOR_DELAY_TIME = 1000
+private val STEPS_SENSOR_DELAY_TIME = 10000
 
 @AndroidEntryPoint
 class StepService @Inject constructor(
@@ -62,7 +62,7 @@ class StepService @Inject constructor(
 
     @Inject lateinit var repository: Repository
 
-    private val isFake = true
+    private val isFake = false
 
     // step sensor installed
     private var sensor: Sensor? = null
@@ -76,12 +76,47 @@ class StepService @Inject constructor(
 
 
     init {
+        Log.d(TAG, "init step service: ")
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onCreate() {
+        super.onCreate()
+        val deviceSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
+
+        startForeground(NOTIFICATION_ID, getNotification())
+        Log.d(TAG, "onCreate: " + deviceSensors)
+
         if (isFake) {
             collectStepsNumber(fakeSteps)
         } else {
             initStepSensor()
             registerListn()
         }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d(TAG, "onStartCommand: ")
+        return super.onStartCommand(intent, flags, startId)
+    }
+
+    /**
+     * binding service to activirty
+     */
+    override fun onBind(intent: Intent): IBinder? {
+        super.onBind(intent)
+        Log.d(TAG, "servise is bind " + intent.toString())
+        this.ServiceBinder().isBind = true
+        return ServiceBinder()
+    }
+
+    /**
+     * unbinding service to activirty
+     */
+    override fun onUnbind(intent: Intent?): Boolean {
+        Log.d(TAG, "servise is unbind " + intent.toString())
+        this.ServiceBinder().isBind = false
+        return super.onUnbind(intent)
     }
 
     /**
@@ -110,6 +145,7 @@ class StepService @Inject constructor(
                     STEPS_SENSOR_DELAY_TIME)
             }
         } else {
+            Log.d(TAG, "registerListn: sensor not found")
         }
     }
 
@@ -158,38 +194,7 @@ class StepService @Inject constructor(
         }
     }
 
-    @SuppressLint("MissingPermission")
-    override fun onCreate() {
-        super.onCreate()
-        val deviceSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
 
-        startForeground(NOTIFICATION_ID, getNotification())
-        Log.d(TAG, "onCreate: " + deviceSensors)
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "onStartCommand: ")
-        return super.onStartCommand(intent, flags, startId)
-    }
-
-    /**
-     * binding service to activirty
-     */
-    override fun onBind(intent: Intent): IBinder? {
-        super.onBind(intent)
-                Log.d(TAG, "servise is bind " + intent.toString())
-        this.ServiceBinder().isBind = true
-        return ServiceBinder()
-    }
-
-    /**
-     * unbinding service to activirty
-     */
-    override fun onUnbind(intent: Intent?): Boolean {
-        Log.d(TAG, "servise is unbind " + intent.toString())
-        this.ServiceBinder().isBind = false
-        return super.onUnbind(intent)
-    }
 
     override fun onDestroy() {
         super.onDestroy()
