@@ -14,7 +14,9 @@ import stas.batura.stepteacker.MainViewModel
 import stas.batura.stepteacker.R
 import stas.batura.stepteacker.databinding.GraphFragmentBinding
 import stas.batura.stepteacker.databinding.HistoryFragmentBinding
-import stas.batura.stepteacker.ui.graph.GraphViewModel
+import stas.batura.stepteacker.ui.custom.CustomRectContainer
+import kotlin.random.Random
+
 
 @AndroidEntryPoint
 class HistoryFragment: Fragment() {
@@ -76,12 +78,21 @@ class HistoryFragment: Fragment() {
         
         historyViewModel.daysHistoryCount.observe(viewLifecycleOwner) {
             Log.d(TAG, "addObservers: $it")
-
+            createCustomViews(it)
         }
     }
 
     private fun removeObservers() {
 
+    }
+
+    private fun createCustomViews(stepsInDays: List<Int>) {
+//        val random = Random(3000)
+        for (stepsCount in stepsInDays) {
+            val rectcont = CustomRectContainer(requireContext(), null)
+            rectcont.currentSteps = stepsCount
+            binding.linearLayout.addView(rectcont)
+        }
     }
 
 }

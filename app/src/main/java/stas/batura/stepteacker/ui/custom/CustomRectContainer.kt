@@ -7,7 +7,12 @@ import android.util.Log
 import android.view.View
 import stas.batura.stepteacker.R
 
-class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, attrs) {
+class CustomRectContainer(context: Context, attrs: AttributeSet?): View(context, attrs) {
+
+//    constructor(context: Context) {
+//        val attr = AttributeSet()
+//        CustomRectContainer(context, null)
+//    }
 
     companion object {
         private const val DEFAULT_FILL_COLOR = Color.YELLOW
@@ -83,7 +88,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         // 1
-        size = Math.min(measuredWidth, measuredHeight)
+        size = Math.min(measuredWidth/2, measuredHeight/2)
 // 2
         setMeasuredDimension(size, size)
     }
