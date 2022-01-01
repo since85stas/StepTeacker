@@ -6,13 +6,13 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import stas.batura.stepteacker.R
-import java.lang.reflect.Array.set
 
 class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, attrs) {
 
     companion object {
         private const val DEFAULT_FILL_COLOR = Color.YELLOW
         private const val DEFAULT_BORDER_COLOR = Color.BLACK
+        private const val DEFAULT_COMPLETE_COLOR = Color.GREEN
         private const val DEFAULT_STEP_LIMIT = 3000
         private const val DEFAULT_CURRENT_STEPS = 1000
     }
@@ -23,6 +23,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     // Some colors for the face background, eyes and mouth.
     private var bordOuterColor = DEFAULT_BORDER_COLOR
     private var fillerColor = DEFAULT_FILL_COLOR
+    private var completeColor = DEFAULT_COMPLETE_COLOR
 
     // Face border width in pixels
     private var borderWidth = 3*0.01f
@@ -35,7 +36,9 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     var currentSteps = DEFAULT_CURRENT_STEPS
         set(value) {
             field = value
-            invalidate()
+            if (currentSteps < stepsLimint) {
+                invalidate()
+            }
         }
 //    private var stepsInvalidate: Int =
 
@@ -57,6 +60,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         // Extract custom attributes into member variables
         bordOuterColor = typedArray.getColor(R.styleable.CustomRectContainer_borderColor, DEFAULT_BORDER_COLOR)
         fillerColor = typedArray.getColor(R.styleable.CustomRectContainer_fillColor, DEFAULT_FILL_COLOR)
+        completeColor = typedArray.getColor(R.styleable.CustomRectContainer_completeColor, DEFAULT_COMPLETE_COLOR)
         stepsLimint = typedArray.getColor(R.styleable.CustomRectContainer_stepLimit, DEFAULT_STEP_LIMIT)
         currentSteps = typedArray.getColor(R.styleable.CustomRectContainer_currentSteps, DEFAULT_CURRENT_STEPS)
 
@@ -106,7 +110,11 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
     }
 
     private fun drawFiller(canvas: Canvas) {
-        paint.color = fillerColor
+        if (currentSteps < stepsLimint) {
+            paint.color = fillerColor
+        } else {
+            paint.color = completeColor
+        }
         paint.style = Paint.Style.FILL
 
         // 2

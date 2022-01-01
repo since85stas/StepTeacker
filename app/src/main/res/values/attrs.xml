@@ -6,6 +6,7 @@
         <!--2-->
         <attr name="fillColor" format="color" />
         <attr name="borderColor" format="color" />
+        <attr name="completeColor" format="color"/>
         <attr name="borderWidth" format="dimension" />
         <attr name="stepLimit" format="integer"/>
         <attr name="currentSteps" format="integer"/>
