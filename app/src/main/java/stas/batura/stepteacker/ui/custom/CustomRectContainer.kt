@@ -110,7 +110,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet): View(context, 
         paint.style = Paint.Style.FILL
 
         // 2
-        val fillRect = Rect(0,(calculetFillerHeight()*size).toInt(),size,size)
+        val fillRect = Rect(0,(size-calculetFillerHeight()*size).toInt(),size,(size).toInt())
         canvas.drawRect(fillRect, paint)
     }
 
