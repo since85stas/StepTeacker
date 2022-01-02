@@ -115,4 +115,11 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha01"
 
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.0'
+
+    // logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //downloader
+    implementation "androidx.tonyodev.fetch2:xfetch2:3.1.6"
+    implementation "androidx.tonyodev.fetch2okhttp:xfetch2okhttp:3.1.6"
 }

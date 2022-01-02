@@ -11,6 +11,12 @@ fun getTimeFormatString(calendar: Calendar): String {
     return dateString
 }
 
+fun getTimeFormatString(time: Long): String {
+    val formatter = SimpleDateFormat(TIME_FORMAT);
+    val dateString = formatter.format( Date(time))
+    return dateString
+}
+
 fun getCurrentDayBegin(): Calendar {
     val calendar = Calendar.getInstance()
     calendar.set(Calendar.HOUR_OF_DAY, 0)

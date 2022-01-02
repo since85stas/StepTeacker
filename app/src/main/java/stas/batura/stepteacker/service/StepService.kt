@@ -141,7 +141,7 @@ class StepService @Inject constructor(
         if (sensor != null) {
             sensor?.also { sensor ->
                 sensorManager.registerListener(this, sensor,
-                    SensorManager.SENSOR_DELAY_FASTEST,
+                    SensorManager.SENSOR_DELAY_NORMAL,
                     STEPS_SENSOR_DELAY_TIME)
             }
         } else {
@@ -153,7 +153,7 @@ class StepService @Inject constructor(
         event?.let { event ->
             val steps = event.values
             Log.d(TAG, "onSensorChanged: $steps")
-            collectStepsNumber(steps.first().toInt())
+            collectStepsNumber(steps.first().toInt(), System.currentTimeMillis())
         }
     }
 
@@ -185,12 +185,11 @@ class StepService @Inject constructor(
     /**
      * собирает данные о шагах из источника и сохраняет в БД
      */
-    private fun collectStepsNumber(steps: Int) {
+    private fun collectStepsNumber(steps: Int, time:Long) {
         serviceScope.launch {
-                Log.d(TAG, "collectStepsNumber: $steps")
-                repository.updateDaySteps(steps = steps, getTimeFormatString(Calendar.getInstance()))
-
-                repository.addNewSteps(steps = steps, date = Calendar.getInstance().timeInMillis)
+                repository.addNewSteps(steps = steps, date = time)
+            Log.d(TAG, "collectStepsNumber: $steps")
+            repository.updateDaySteps(steps = steps, getTimeFormatString(time))
         }
     }
 
