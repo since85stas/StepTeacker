@@ -56,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
 //        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
+            //ask for permission
+            requestPermissions(new String[]{Manifest.permission.ACTIVITY_RECOGNITION}, PHYISCAL_ACTIVITY);
+        }
 
         setContentView(R.layout.main_activity);
         startService();

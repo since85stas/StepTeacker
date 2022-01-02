@@ -24,13 +24,9 @@
             android:text="0"
             android:textSize="24sp"
             setStepCount="@{viewModel.daysLimit}"
-            />
+            android:layout_gravity="center"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            setStepCount="@{viewModel.stepsForDayFromList}"
+            android:textStyle="bold"
             />
 
         <Button
@@ -39,14 +35,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.dropStepsTabale()}"
+            android:visibility="gone"
             />
 
         <stas.batura.stepteacker.ui.custom.CustomRectContainer
             android:id="@+id/stepsCustomUiContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fillColor="@color/colorAccent"
+            app:fillColor="@color/colorPrimary"
             setStepsToCustomUi="@{viewModel.stepsForDayFromList}"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            setStepCount="@{viewModel.stepsForDayFromList}"
+            android:layout_gravity="center"
+
+            android:textStyle="bold"
             />
 
     </LinearLayout>

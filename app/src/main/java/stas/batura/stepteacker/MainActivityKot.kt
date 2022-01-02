@@ -1,9 +1,12 @@
 package stas.batura.stepteacker
 
+import android.Manifest
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
 import stas.batura.stepteacker.service.StepService
+
+const val PHYISCAL_ACTIVITY = 11
 
 @AndroidEntryPoint
 class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
@@ -24,6 +29,18 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
 
         // получаем вью модель
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        //        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+//        SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACTIVITY_RECOGNITION
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            //ask for permission
+            requestPermissions(arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), PHYISCAL_ACTIVITY)
+        }
 
         // определяем контроллер
         configureNavigController()

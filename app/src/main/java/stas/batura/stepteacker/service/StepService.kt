@@ -126,7 +126,7 @@ class StepService @Inject constructor(
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             val gravSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_STEP_COUNTER)
             // Use the version 3 gravity sensor.
-            sensor = gravSensors.firstOrNull()
+            sensor = gravSensors[1]
         } else {
             Toast.makeText(applicationContext, "Step sensor not detected", Toast.LENGTH_LONG).show()
         }
@@ -141,7 +141,7 @@ class StepService @Inject constructor(
         if (sensor != null) {
             sensor?.also { sensor ->
                 sensorManager.registerListener(this, sensor,
-                    SensorManager.SENSOR_DELAY_NORMAL,
+                    SensorManager.SENSOR_DELAY_FASTEST,
                     STEPS_SENSOR_DELAY_TIME)
             }
         } else {
