@@ -94,7 +94,10 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
 
         // fetting service connection
         mainViewModel.serviceConnection.observe(this,
-            { serviceConnection -> serviceConnection?.let { bindCurrentService(it) } })
+            { serviceConnection -> serviceConnection?.let {
+                Timber.d("observe connection: $it")
+                bindCurrentService(it)
+            } })
     }
 
     /**
@@ -105,6 +108,7 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
     }
 
     private fun startService() {
+        Timber.d("service started")
         val serviceIntent = Intent(this, StepService::class.java)
         startService(serviceIntent)
     }

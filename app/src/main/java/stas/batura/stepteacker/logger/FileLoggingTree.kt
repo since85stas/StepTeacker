@@ -115,7 +115,7 @@ class FileLoggingTree(val path:String) : DebugTree() {
             .append(" ")
             .append("|| ")
             .append(getPriorityString(priority))
-            .append("-")
+            .append(":")
             .append(" ")
             .append(message)
             .append(" ")

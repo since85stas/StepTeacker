@@ -24,7 +24,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import stas.batura.stepteacker.MainActivity
+import stas.batura.stepteacker.MainActivityKot
 import stas.batura.stepteacker.data.Repository
 import stas.batura.stepteacker.utils.*
 import java.util.*
@@ -210,7 +210,7 @@ class StepService @Inject constructor(
 
         createNotificationChannel()
 
-        val notifyIntent = Intent(this, MainActivity::class.java).apply {
+        val notifyIntent = Intent(this, MainActivityKot::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val notifyPendingIntent = PendingIntent.getActivity(
