@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
 import stas.batura.stepteacker.service.StepService
+import timber.log.Timber
 
 const val PHYISCAL_ACTIVITY = 11
 
@@ -53,12 +54,14 @@ class MainActivityKot : AppCompatActivity(R.layout.main_activity) {
 
     override fun onStart() {
         super.onStart()
+        Timber.d("onStart")
         addObservers()
         mainViewModel.createServiceConnection()
     }
 
     override fun onStop() {
         super.onStop()
+        Timber.d("onStop")
         val conn: ServiceConnection? = mainViewModel.serviceConnection.value
         if (conn != null) {
             unbindService(conn)

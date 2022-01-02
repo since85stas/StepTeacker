@@ -62,7 +62,7 @@ class StepService @Inject constructor(
 
     @Inject lateinit var repository: Repository
 
-    private val isFake = false
+    private val isFake = true
 
     // step sensor installed
     private var sensor: Sensor? = null
