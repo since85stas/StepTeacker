@@ -15,6 +15,7 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import android.util.Log.d
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
@@ -27,6 +28,8 @@ import kotlinx.coroutines.flow.flow
 import stas.batura.stepteacker.MainActivityKot
 import stas.batura.stepteacker.data.Repository
 import stas.batura.stepteacker.utils.*
+import timber.log.Timber
+import timber.log.Timber.d
 import java.util.*
 import javax.inject.Inject
 
@@ -62,7 +65,7 @@ class StepService @Inject constructor(
 
     @Inject lateinit var repository: Repository
 
-    private val isFake = true
+    private val isFake = false
 
     // step sensor installed
     private var sensor: Sensor? = null
@@ -85,7 +88,7 @@ class StepService @Inject constructor(
         val deviceSensors: List<Sensor> = sensorManager.getSensorList(Sensor.TYPE_ALL)
 
         startForeground(NOTIFICATION_ID, getNotification())
-        Log.d(TAG, "onCreate: " + deviceSensors)
+        Timber.d("onCreate: idFake $isFake")
 
         if (isFake) {
             collectStepsNumber(fakeSteps)
@@ -145,14 +148,14 @@ class StepService @Inject constructor(
                     STEPS_SENSOR_DELAY_TIME)
             }
         } else {
-            Log.d(TAG, "registerListn: sensor not found")
+            Timber.e("registerListn: sensor not found")
         }
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
         event?.let { event ->
             val steps = event.values
-            Log.d(TAG, "onSensorChanged: $steps")
+            Timber.d( "onSensorChanged: ${steps.first()} ${System.currentTimeMillis()}")
             collectStepsNumber(steps.first().toInt(), System.currentTimeMillis())
         }
     }
@@ -187,7 +190,7 @@ class StepService @Inject constructor(
      */
     private fun collectStepsNumber(steps: Int, time:Long) {
         serviceScope.launch {
-                repository.addNewSteps(steps = steps, date = time)
+            repository.addNewSteps(steps = steps, date = time)
             Log.d(TAG, "collectStepsNumber: $steps")
             repository.updateDaySteps(steps = steps, getTimeFormatString(time))
         }
@@ -197,7 +200,7 @@ class StepService @Inject constructor(
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy: ")
+        Timber.d( "onDestroy: ")
         serviceJob.cancel()
         unregisterListn()
     }
