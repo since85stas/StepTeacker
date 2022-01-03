@@ -161,7 +161,7 @@ class StepService @Inject constructor(
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        Log.d(TAG, "onAccuracyChanged: $sensor, $accuracy")
+        Timber.d( "onAccuracyChanged: $sensor, $accuracy")
     }
 
     /**
@@ -291,6 +291,7 @@ class StepService @Inject constructor(
      * stopping service
      */
     fun stopService() {
+        Timber.d("stopService()")
         stopSelf()
     }
 

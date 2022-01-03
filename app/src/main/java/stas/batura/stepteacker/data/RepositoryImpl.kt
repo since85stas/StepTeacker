@@ -18,11 +18,12 @@ import stas.batura.stepteacker.utils.getCurrentDayBegin
 import stas.batura.stepteacker.utils.getCurrentDayEnd
 import stas.batura.stepteacker.utils.getDayBegin
 import stas.batura.stepteacker.utils.getPreviousDayBegin
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
 // интервал через который проверяем обновление количества шагов
-const val STEPS_CHECK_TIME_INTERVAL = 10000L
+const val STEPS_CHECK_TIME_INTERVAL = 60000L
 
 class RepositoryImpl @Inject constructor(
     val roomDao: Database,
@@ -65,6 +66,7 @@ class RepositoryImpl @Inject constructor(
                     dateInMillis = date
                 )
             )
+            Timber.d("after step added steps:$steps saveTime: $date currtime: ${System.currentTimeMillis()}")
         }
     }
 
@@ -104,7 +106,9 @@ class RepositoryImpl @Inject constructor(
 
     override fun getPrefsStepsLimit(): Flow<Int> {
         return prefs.data.map { it ->
-            it[PreferencesScheme.FIELD_STEP_LIMIT] ?: 10000
+            val limit = it[PreferencesScheme.FIELD_STEP_LIMIT]
+            Timber.d("limit from prefs: $limit")
+            limit    ?: 10000
         }
     }
 

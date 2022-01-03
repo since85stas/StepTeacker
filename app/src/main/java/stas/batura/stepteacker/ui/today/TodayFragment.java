@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 import stas.batura.stepteacker.MainViewModel;
 import stas.batura.stepteacker.R;
 import stas.batura.stepteacker.databinding.TodayFragmentBinding;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class TodayFragment extends Fragment {
@@ -60,12 +61,14 @@ public class TodayFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Timber.d("onStart()");
 //        addObservers();
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Timber.d("onStop()");
 //        removeObservers();
     }
 
