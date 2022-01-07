@@ -8,7 +8,9 @@
         <item name="colorSecondaryVariant">@color/blue_grey_200</item>
         <item name="colorOnSecondary">@android:color/black</item>
     </style>
+
     <style name="Theme.App" parent="Base.Theme.App" />
+
     <style name="Base.Theme.App.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/teal_500</item>
         <item name="colorPrimaryDark">?attr/colorPrimaryVariant</item>

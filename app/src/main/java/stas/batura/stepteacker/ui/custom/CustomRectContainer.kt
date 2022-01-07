@@ -26,7 +26,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet?): View(context,
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     // Some colors for the face background, eyes and mouth.
-    private var bordOuterColor = context.getColor(R.color.design_default_color_on_primary)
+    private var bordOuterColor = DEFAULT_BORDER_COLOR
     private var fillerColor = DEFAULT_FILL_COLOR
     private var completeColor = DEFAULT_COMPLETE_COLOR
 

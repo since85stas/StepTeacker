@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             setStepsToCustomUi="@{viewModel.stepsForDayFromList}"
             android:layout_gravity="center"
+            app:borderColor="?attr/colorOnSecondary"
             />
 
         <TextView
