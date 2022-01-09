@@ -19,4 +19,5 @@
     <style name="Widget.AppTheme.CustomRectContainer" parent="">
         <item name="borderColor">@color/purpulr</item>
     </style>
+
 </resources>

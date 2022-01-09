@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.App.Toolbar.PrimarySurface" parent="Widget.App.Toolbar.Surface" />
+
+    <style name="Widget.AppTheme.CustomRectContainer" parent="">
+        <item name="borderColor">@color/teal_200</item>
+    </style>
+
+</resources>
