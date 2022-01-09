@@ -7,6 +7,8 @@
         <item name="colorSecondary">@color/blue_grey_200</item>
         <item name="colorSecondaryVariant">@color/blue_grey_200</item>
         <item name="colorOnSecondary">@android:color/black</item>
+
+        <item name="customRectContainerStyle">@style/Widget.AppTheme.CustomRectContainer</item>
     </style>
 
     <style name="Theme.App" parent="Base.Theme.App" />
@@ -19,6 +21,8 @@
         <item name="colorSecondary">@color/blue_grey_500</item>
         <item name="colorSecondaryVariant">@color/blue_grey_700</item>
         <item name="colorOnSecondary">@android:color/white</item>
+
+        <item name="customRectContainerStyle">@style/Widget.AppTheme.CustomRectContainer</item>
     </style>
     <style name="Theme.App.Light" parent="Base.Theme.App.Light" />
     <style name="Theme.App.DayNight" parent="Theme.App.Light" />

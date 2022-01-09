@@ -16,7 +16,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet?): View(context,
 
     companion object {
         private const val DEFAULT_FILL_COLOR = Color.YELLOW
-        private const val DEFAULT_BORDER_COLOR = Color.BLACK
+        private const val DEFAULT_BORDER_COLOR = Color.GREEN
         private const val DEFAULT_COMPLETE_COLOR = Color.GREEN
         private const val DEFAULT_STEP_LIMIT = 3000
         private const val DEFAULT_CURRENT_STEPS = 1000
@@ -59,7 +59,7 @@ class CustomRectContainer(context: Context, attrs: AttributeSet?): View(context,
         // Obtain a typed array of attributes
 
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.CustomRectContainer,
-            0, 0)
+            R.attr.customRectContainerStyle, R.style.Widget_AppTheme_CustomRectContainer)
 
         // 7
         // Extract custom attributes into member variables

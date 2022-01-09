@@ -15,4 +15,8 @@
     </style>
     <style name="Widget.App.Toolbar.Surface" parent="Base.Widget.App.Toolbar.Surface" />
     <style name="Widget.App.Toolbar.PrimarySurface" parent="Widget.App.Toolbar.Primary" />
+
+    <style name="Widget.AppTheme.CustomRectContainer" parent="">
+        <item name="borderColor">@color/purpulr</item>
+    </style>
 </resources>

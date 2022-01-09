@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--1-->
     <declare-styleable name="CustomRectContainer">
-        <!--2-->
         <attr name="fillColor" format="color" />
         <attr name="borderColor" format="color" />
         <attr name="completeColor" format="color"/>
         <attr name="borderWidth" format="dimension" />
         <attr name="stepLimit" format="integer"/>
         <attr name="currentSteps" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="AppTheme">
+        <attr name="customRectContainerStyle" format="reference"/>
     </declare-styleable>
 
 </resources>
