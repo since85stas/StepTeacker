@@ -24,6 +24,8 @@
 
         <item name="customRectContainerStyle">@style/Widget.AppTheme.CustomRectContainer</item>
     </style>
+
     <style name="Theme.App.Light" parent="Base.Theme.App.Light" />
+
     <style name="Theme.App.DayNight" parent="Theme.App.Light" />
 </resources>
